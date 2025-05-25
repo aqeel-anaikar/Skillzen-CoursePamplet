@@ -42,7 +42,7 @@
 
         /* Header Styles */
         header {
-            background: linear-gradient(120deg, #7b1fa2 60%, #e040fb 100%);
+            background: linear-gradient(120deg, #7b1fa2 0%, #3a237a 30%, #cc99ff 70%, #ffcccc 100%);
             color: white;
             text-align: center;
             padding: 90px 20px 60px 20px;
@@ -53,22 +53,27 @@
             box-shadow: 0 8px 32px rgba(123,31,162,0.12);
         }
         header .container {
-            background: rgba(255,255,255,0.07);
+            background: rgba(44,19,59,0.10);
             border-radius: 24px;
-            box-shadow: 0 4px 24px rgba(224,64,251,0.08);
+            box-shadow: 0 4px 24px rgba(44,19,59,0.10);
             padding: 32px 24px 24px 24px;
         }
         header h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(123,31,162,0.12);
+            background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 2px 8px rgba(44,19,59,0.10);
         }
         header p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 18px;
-            color: #f3e5f5;
+            color: #e0e0e0;
+            text-shadow: 0 2px 8px #2d133b33;
         }
         header img {
             filter: drop-shadow(0 2px 8px rgba(123,31,162,0.10));
@@ -143,14 +148,14 @@
             font-size: 1rem;
         }
         .tab-btn.active {
-            background: linear-gradient(90deg, #e040fb 60%, #7b1fa2 100%);
-            color: white;
-            border: 2px solid #e040fb;
-            box-shadow: 0 4px 16px rgba(123,31,162,0.13);
+            background: linear-gradient(90deg, #2d133b 60%, #3a237a 100%);
+            color: #fff;
+            border: 2px solid #2d133b;
+            box-shadow: 0 4px 16px rgba(44,19,59,0.13);
         }
         .tab-btn:hover:not(.active) {
-            background: #f3e5f5;
-            color: #e040fb;
+            background: #cc99ff;
+            color: #2d133b;
         }
         .program-content {
             display: none;
@@ -168,12 +173,12 @@
             border: 1.5px solid #f3e5f5;
         }
         .program-card h3 {
-            color: #e040fb;
+            color: #2d133b;
             margin-bottom: 15px;
             font-size: 1.5rem;
         }
         .program-card .highlight {
-            color: #7b1fa2;
+            color: #3a237a;
             font-weight: 600;
         }
         .program-card ul {
@@ -195,8 +200,8 @@
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            background: linear-gradient(90deg, #e040fb 60%, #7b1fa2 100%);
-            color: white;
+            background: linear-gradient(90deg, #2d133b 60%, #3a237a 100%);
+            color: #fff;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
@@ -204,22 +209,22 @@
             border: none;
             cursor: pointer;
             font-size: 1rem;
-            box-shadow: 0 2px 8px rgba(224,64,251,0.10);
+            box-shadow: 0 2px 8px rgba(44,19,59,0.10);
         }
         .btn:hover {
-            background: #fff;
-            color: #7b1fa2;
-            border: 2px solid #e040fb;
-            box-shadow: 0 5px 15px rgba(123,31,162,0.18);
+            background: linear-gradient(90deg, #cc99ff 60%, #9999ff 100%);
+            color: #2d133b;
+            border: 2px solid #2d133b;
+            box-shadow: 0 5px 15px rgba(44,19,59,0.18);
         }
         .btn-outline {
-            background: white;
-            border: 2px solid #e040fb;
-            color: #7b1fa2;
+            background: transparent;
+            border: 2px solid #2d133b;
+            color: #2d133b;
         }
         .btn-outline:hover {
-            background: #e040fb;
-            color: white;
+            background: #2d133b;
+            color: #fff;
         }
 
         /* Company Training */
@@ -300,57 +305,37 @@
 
         /* Footer */
         footer {
-            background: linear-gradient(120deg, #4a0072 60%, #7b1fa2 100%);
+            background: linear-gradient(120deg, #3a237a 0%, #7b1fa2 30%, #cc99ff 70%, #ffcccc 100%);
             color: white;
             padding: 60px 0 20px;
             border-top-left-radius: 40px;
             border-top-right-radius: 40px;
-            box-shadow: 0 -4px 32px rgba(123,31,162,0.10);
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            box-shadow: 0 -4px 32px rgba(44,19,59,0.10);
         }
         .footer-column h3 {
-            color: #e040fb;
+            background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
             margin-bottom: 20px;
             font-size: 1.3rem;
         }
-        .footer-column ul {
-            list-style: none;
-        }
-        .footer-column li {
-            margin-bottom: 10px;
-        }
-        .footer-column a {
-            color: #f3e5f5;
-            text-decoration: none;
-            transition: color 0.3s;
+        .footer-column p, .footer-column li, .footer-column a {
+            color: #e0e0e0;
         }
         .footer-column a:hover {
             color: #fff;
         }
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .social-links a {
-            color: #e040fb;
-            font-size: 1.3rem;
-            transition: transform 0.3s, color 0.3s;
-        }
-        .social-links a:hover {
-            color: #fff;
-            transform: translateY(-5px) scale(1.2);
-        }
         .copyright {
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid rgba(224,64,251,0.15);
-            color: #f3e5f5;
+            border-top: 1px solid rgba(44,19,59,0.15);
+            background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
             font-size: 0.9rem;
         }
 
@@ -409,7 +394,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(120deg, #7b1fa2 60%, #e040fb 100%);
+            background: linear-gradient(120deg, #cc99ff 0%, #9999ff 40%, #ccffcc 70%, #ffcccc 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -477,7 +462,7 @@
 </head>
 <body>
     <!-- Loading Screen -->
-    <div id="loader-bg" style="position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(120deg,#7b1fa2 60%,#e040fb 100%);display:flex;align-items:center;justify-content:center;transition:opacity 0.6s;">
+    <div id="loader-bg" style="position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(120deg,#cc99ff 0%,#9999ff 40%,#ccffcc 70%,#ffcccc 100%);display:flex;align-items:center;justify-content:center;transition:opacity 0.6s;">
         <div style="text-align:center;">
             <img src="Logo1.png" alt="Skillzen Logo" style="width:110px;height:110px;animation:logo-bounce 1.5s infinite alternate;filter:drop-shadow(0 4px 32px #fff8);border-radius:24px;background:white;padding:16px;">
             <div style="margin-top:24px;">
@@ -507,7 +492,6 @@
                 <img src="Logo1.png" alt="Skillzen Symbol Logo" style="height: 56px; width: 56px; object-fit: contain; border-radius: 10px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.07);">
                 <h1 style="margin: 0;">Skillzen Institute Pvt Ltd</h1>
             </div>
-            <img src="Logo2.png" alt="Skillzen Name Logo" style="height: 38px; margin-bottom: 10px; object-fit: contain;">
             <p>Your Pathway to Placement Excellence</p>
             <p>Training Students from 1st Year to Final Year for Campus Recruitment Success</p>
             <a href="#programs" class="btn">Explore Programs</a>
@@ -568,7 +552,7 @@
             <!-- Integrated Program -->
             <div id="integrated" class="program-content active">
                 <div class="program-card">
-                    <h3>Integrated Placement Program <span class="highlight">(200 Hours)</span></h3>
+                    <h3>Integrated Placement Program <span class="highlight"></span></h3>
                     <p><strong>For:</strong> All-Year Students</p>
                     <h4>Modules:</h4>
                     <ul>
@@ -578,7 +562,7 @@
                         <li><strong>Resume Building & LinkedIn Optimization</strong></li>
                     </ul>
                     <p><strong>Outcome:</strong> All-Round Readiness for Placements</p>
-                    <a href="integrated-program.html" class="btn">View Course</a>
+                    <a href="integrated-program.html" class="btn" onclick="return showLoaderAndNavigate(event, 'integrated-program.html')">View Course</a>
                 </div>
             </div>
             
@@ -595,7 +579,7 @@
                         <li><strong>Time Management & Stress Handling</strong></li>
                     </ul>
                     <p><em>Excludes Company-Specific Training</em></p>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="crt-program.html" class="btn" onclick="return showLoaderAndNavigate(event, 'crt-program.html')">View Course</a>
                 </div>
             </div>
             
@@ -606,11 +590,11 @@
                     <p><strong>For:</strong> Mid-Tier Company Aspirants</p>
                     <h4>Highlights:</h4>
                     <ul>
-                        <li><strong>Core Technical Skills</strong> (Domain-Specific: IT/CS/ECE)</li>
+                        <li><strong>Core Technical Skills</strong> (Domain-Specific: IT/CS)</li>
                         <li><strong>Basic Aptitude & Reasoning</strong></li>
                         <li><strong>HR Interview Strategies</strong></li>
                     </ul>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
                 </div>
             </div>
             
@@ -626,7 +610,7 @@
                         <li><strong>Case Studies & Role-Specific Prep</strong> (Analytics, Consulting)</li>
                         <li><strong>Salary Negotiation Workshops</strong></li>
                     </ul>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
                 </div>
             </div>
             
@@ -642,7 +626,7 @@
                         <li><strong>Mock Coding Rounds</strong> (CodeChef, LeetCode Patterns)</li>
                         <li><strong>FAANG-Level Interview Prep</strong></li>
                     </ul>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
                 </div>
             </div>
             
@@ -657,7 +641,7 @@
                         <li><strong>Corporate Etiquette & Email Drafting</strong></li>
                         <li><strong>Mini-Projects for Resumes</strong></li>
                     </ul>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
                 </div>
                 
                 <div class="program-card">
@@ -669,7 +653,7 @@
                         <li><strong>Confidence-Building Sessions</strong></li>
                         <li><strong>Mentorship by Industry Leaders</strong></li>
                     </ul>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
                 </div>
                 
                 <div class="program-card">
@@ -681,7 +665,7 @@
                         <li><strong>Pitch Presentation Skills</strong></li>
                         <li><strong>Foundational Product Management</strong></li>
                     </ul>
-                    <a href="#" class="btn">View Course</a>
+                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
                 </div>
             </div>
         </div>
@@ -801,8 +785,8 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
+            <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 32px;">
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px;">
                     <h3>Skillzen Institute</h3>
                     <p>Your Pathway to Placement Excellence</p>
                     <div class="social-links">
@@ -813,19 +797,9 @@
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Programs</h3>
-                    <ul>
-                        <li><a href="#">Integrated Program</a></li>
-                        <li><a href="#">Regular CRT</a></li>
-                        <li><a href="#">Mission Million</a></li>
-                        <li><a href="#">Super Dream</a></li>
-                        <li><a href="#">New Courses</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px; text-align: right;">
                     <h3>Contact Us</h3>
-                    <ul>
+                    <ul style="list-style: none; padding-left: 0;">
                         <li><i class="fas fa-phone"></i> +91-XXXXXX5678</li>
                         <li><i class="fas fa-envelope"></i> training@skillzeninstitute.com</li>
                         <li><i class="fas fa-map-marker-alt"></i> Chennai</li>
@@ -902,6 +876,19 @@
         window.addEventListener('resize', function() {
             // No action needed
         });
+
+        function showLoaderAndNavigate(e, url) {
+            e.preventDefault();
+            var loader = document.getElementById('loader-bg');
+            if(loader) {
+                loader.style.display = 'flex';
+                loader.style.opacity = '1';
+            }
+            setTimeout(function() {
+                window.location.href = url;
+            }, 900); // Show loader for 0.9s before navigating
+            return false;
+        }
     </script>
 </body>
 </html>

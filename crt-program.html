@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillzen Institute - Campus Recruitment Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #1a237e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a237e, #4a148c);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Semester Navigation */
+        .semester-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 40px 0;
+        }
+
+        .semester-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid #1a237e;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .semester-btn.active {
+            background: #1a237e;
+            color: white;
+        }
+
+        /* Training Schedule */
+        .schedule-container {
+            display: none;
+        }
+
+        .schedule-container.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-table th {
+            background-color: #1a237e;
+            color: white;
+            font-weight: 600;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .schedule-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .topic-list {
+            list-style-type: none;
+        }
+
+        .topic-list li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .topic-list li:before {
+            content: "•";
+            color: #ff6d00;
+            position: absolute;
+            left: 5px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff6d00;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff9100;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,109,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0f2e;
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    
+    <header style="background: linear-gradient(120deg, #7b1fa2 0%, #3a237a 30%, #cc99ff 70%, #ffcccc 100%); color: white; text-align: center; padding: 90px 20px 60px 20px; position: relative; overflow: hidden; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px; box-shadow: 0 8px 32px rgba(123,31,162,0.12);">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 10px;">
+                <h1>Campus Recruitment Training</h1>
+            </div>
+            <p>Comprehensive 6-semester training program to prepare students for campus placements</p>
+
+            <a href="index.html" class="btn" style="margin-top:18px;">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Semester Navigation -->
+        <div class="semester-nav">
+            <button class="semester-btn active" onclick="showSemester('sem1')">Semester 1</button>
+            <button class="semester-btn" onclick="showSemester('sem2')">Semester 2</button>
+            <button class="semester-btn" onclick="showSemester('sem3')">Semester 3</button>
+            <button class="semester-btn" onclick="showSemester('sem4')">Semester 4</button>
+            <button class="semester-btn" onclick="showSemester('sem5')">Semester 5</button>
+            <button class="semester-btn" onclick="showSemester('sem6')">Semester 6</button>
+        </div>
+
+        <!-- Semester 1 Schedule -->
+        <section id="sem1" class="schedule-container active">
+            <h2>Semester 1 Training Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Introduction to Soft Skills</li>
+                                <li>Communication Skills</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Vocabulary - Synonyms and Antonyms</li>
+                                <li>Analogous Pairing of Words</li>
+                                <li>Idioms and Phrases</li>
+                                <li>Sentence Completion</li>
+                                <li>Sentence Correction</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Add all days for Semester 1 -->
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Basic Arithmetic Operations</li>
+                                <li>Addition and Subtraction</li>
+                                <li>Multiplication and Division</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Square, Square root, Cube and Cube root</li>
+                                <li>Number Patterns and Sequences</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Fractions, Decimals, and Percentages</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Logical Deduction</li>
+                                <li>Syllogisms</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Analogies</li>
+                                <li>Series Completion</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Coding-Decoding</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Blood Relations</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 1: Introduction to C++</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 2: Data Types and Variables</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 3: Control Structures, Basic Data Structure</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 4: Functions and Recursion</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 5: Object-Oriented Programming (OOP)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 6: Advanced C++ Features</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 7: Data Structures using C++</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 8: Algorithms in C++</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 9: C++ Standard Template Library (STL)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Module 10: Final Project</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Assessment</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Semester 2 Schedule -->
+        <section id="sem2" class="schedule-container">
+            <h2>Semester 2 Training Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Time Management and Organizational Skills</li>
+                                <li>Leadership Skills</li>
+                                <li>Adaptability and Flexibility</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Professional Etiquette and Networking</li>
+                                <li>Stress Management and Work-Life Balance</li>
+                                <li>Presentation and Public Speaking Skills</li>
+                                <li>Review and Application</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Add all days for Semester 2 -->
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Reading Comprehension</li>
+                                <li>Grammar Rules and Usage</li>
+                                <li>Parts of Speech</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Active and Passive Voice</li>
+                                <li>Direct and Indirect Speech</li>
+                                <li>Sentence Rearrangement</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Direction Sense</li>
+                                <li>Seating Arrangements</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Puzzle-solving Strategies</li>
+                                <li>Critical Thinking Exercises</li>
+                                <li>Non-Verbal Reasoning - Visual Patterns</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Logical Connectives</li>
+                                <li>Statement and Assumptions</li>
+                                <li>Statement and Conclusions</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Ratio and Proportion</li>
+                                <li>Profit and Loss</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Simple and Compound Interest</li>
+                                <li>Time, Speed, and Distance</li>
+                                <li>Time and Work</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Course Overview and Java Installation</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Basic Syntax and Data Types</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Control Structures</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Methods</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Arrays and Strings</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Object-Oriented Programming Basics</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Practice and Review</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Inheritance and Polymorphism</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Abstract Classes and Interfaces</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Exception Handling</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Assessment</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Semester 3 Schedule -->
+        <section id="sem3" class="schedule-container">
+            <h2>Semester 3 Training Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Communication Skills</li>
+                                <li>Resume and Cover Letter Writing</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Job Search Strategies</li>
+                                <li>Interview Skills – Part 1</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Add all days for Semester 3 -->
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Paragraph Formation</li>
+                                <li>Cloze Test</li>
+                                <li>Error Spotting</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Para Jumbles</li>
+                                <li>Sentence Improvement</li>
+                                <li>Word Usage</li>
+                                <li>Contextual Vocabulary</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Sentence Transformation</li>
+                                <li>Critical Reasoning</li>
+                                <li>Para Completion</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Time, Speed, and Distance</li>
+                                <li>Time and Work</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Pipes and Cisterns</li>
+                                <li>Average and Percentage</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Age Problems</li>
+                                <li>Partnership</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Decision Making</li>
+                                <li>Clocks and Calendars</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Number and Letter Series</li>
+                                <li>Data Sufficiency</li>
+                                <li>Logical Games and Puzzles</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Collections Framework</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>File I/O</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Java Utility Classes</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Practice and Review</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Multithreading</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Lambda Expressions and Stream API</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Generics</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Annotations and Reflection</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Working with Databases</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Assessment</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Semester 4 Schedule -->
+        <section id="sem4" class="schedule-container">
+            <h2>Semester 4 Training Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Interview Skills – Part 2</li>
+                                <li>Group Discussions and Case Studies</li>
+                                <li>Professional Networking and LinkedIn</li>
+                                <li>Personal Branding</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Workplace Ethics and Professionalism</li>
+                                <li>Time Management and Productivity</li>
+                                <li>Stress Management and Resilience</li>
+                                <li>Final Preparation and Wrap-Up</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Add all days for Semester 4 -->
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Vocabulary in Context</li>
+                                <li>Sentence Structure</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Word Analogies</li>
+                                <li>Root Words</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Phrasal Verbs</li>
+                                <li>Homonyms and Homophones</li>
+                                <li>Sentence Synthesis</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Mixtures and Allegations</li>
+                                <li>Permutations and Combinations</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Probability</li>
+                                <li>Data Interpretation - Tables and Charts</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Data Sufficiency</li>
+                                <li>Mensuration - Area and Volume</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Cubes and Dice</li>
+                                <li>Mathematical Operations</li>
+                                <li>Logical Inequalities</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Logical Coding and Decoding</li>
+                                <li>Statement and Arguments</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Building GUI Applications</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Practice and Review</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Common Interview Questions</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Coding Challenges</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Project Planning</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Project Implementation</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Project Implementation (continued)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Project Presentation</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Mock Interviews</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Final Assessment</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Semester 5 Schedule -->
+        <section id="sem5" class="schedule-container">
+            <h2>Semester 5 Training Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Geometry</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Trigonometry Basics</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Add all days for Semester 5 -->
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Logarithms</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Venn Diagrams and Sets</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Decision Making</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Clocks and Calendars</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Number and Letter Series</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Data Sufficiency</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Logical Games and Puzzles</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10 to 15</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Math-based problems and Bitwise algorithms</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16 to 20</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Arrays, Searching, Sorting and Strings</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Semester 6 Schedule -->
+        <section id="sem6" class="schedule-container">
+            <h2>Semester 6 Training Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Blood Relations</li>
+                                <li>Complex Direction Sense</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Seating Arrangements</li>
+                                <li>Advanced Puzzle-solving Strategies</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <!-- Add all days for Semester 6 -->
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Advanced Critical Thinking Exercises</li>
+                                <li>Non-Verbal Reasoning - Advanced Visual Patterns</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Functions and Graphs</li>
+                                <li>Systems of Equations</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Series and Sequences</li>
+                                <li>Progressions - Arithmetic, Geometric, and Harmonic</li>
+                                <li>Permutations, Combinations, and Probability</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Statistics and Data Analysis</li>
+                                <li>Analytical Geometry</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Recursion, Backtracking, Greedy Algorithm</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8 to 16</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Dynamic Programming</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>17 to 19</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Interview Preparation</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>
+                            <ul class="topic-list">
+                                <li>Final Assessment</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: linear-gradient(120deg, #3a237a 0%, #7b1fa2 30%, #cc99ff 70%, #ffcccc 100%); color: white; padding: 60px 0 20px; border-top-left-radius: 40px; border-top-right-radius: 40px; box-shadow: 0 -4px 32px rgba(44,19,59,0.10); margin-top: 60px;">
+        <div class="container">
+            <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 32px;">
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px;">
+                    <h3 style="background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 20px; font-size: 1.3rem;">Skillzen Institute</h3>
+                    <p style="color:#e0e0e0;">Your Pathway to Placement Excellence</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px; text-align: right;">
+                    <h3 style="background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 20px; font-size: 1.3rem;">Contact Us</h3>
+                    <ul style="list-style: none; padding-left: 0; color:#e0e0e0;">
+                        <li><i class="fas fa-phone"></i> +91-XXXXXX5678</li>
+                        <li><i class="fas fa-envelope"></i> training@skillzeninstitute.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Chennai</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright" style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(44,19,59,0.15); background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; font-size: 0.9rem;">
+                <p>&copy; 2023 Skillzen Institute Pvt Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showSemester(semesterId) {
+            // Hide all semester containers
+            document.querySelectorAll('.schedule-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // Deactivate all semester buttons
+            document.querySelectorAll('.semester-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected semester and activate button
+            document.getElementById(semesterId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
