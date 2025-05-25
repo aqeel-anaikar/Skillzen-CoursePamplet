@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillzen Institute - Integrated Placement Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #1a237e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a237e, #4a148c);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Semester Navigation */
+        .semester-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 40px 0;
+        }
+
+        .semester-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid #1a237e;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .semester-btn.active {
+            background: #1a237e;
+            color: white;
+        }
+
+        /* Course Cards */
+        .course-container {
+            display: none;
+        }
+
+        .course-container.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-code {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 1.2rem;
+        }
+
+        .course-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .course-hours {
+            background: #1a237e;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .course-objectives {
+            margin-bottom: 20px;
+        }
+
+        .course-objectives li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .course-objectives li:before {
+            content: "•";
+            color: #ff6d00;
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modules-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .modules-table th, .modules-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modules-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .modules-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .module-hours {
+            text-align: center;
+            color: #666;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff6d00;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff9100;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,109,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0f2e;
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .course-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .modules-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Integrated Placement Program</h1>
+            <p>Comprehensive 6-semester training program covering Soft Skills, Aptitude, and Technical skills for placement success</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Semester Navigation -->
+        <div class="semester-nav">
+            <button class="semester-btn active" onclick="showSemester('sem1')">Semester 1</button>
+            <button class="semester-btn" onclick="showSemester('sem2')">Semester 2</button>
+            <button class="semester-btn" onclick="showSemester('sem3')">Semester 3</button>
+            <button class="semester-btn" onclick="showSemester('sem4')">Semester 4</button>
+            <button class="semester-btn" onclick="showSemester('sem5-6')">Semester 5-6</button>
+        </div>
+
+        <!-- Semester 1 Courses -->
+        <section id="sem1" class="course-container active">
+            <h2>Semester 1 Courses</h2>
+            
+            <!-- STS101 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">STS101</span>
+                        <span class="course-title">Mastering Soft Skills and Verbal Communication 1</span>
+                    </div>
+                    <span class="course-hours">38 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To enhance communication skills</li>
+                        <li>To build confidence in public speaking</li>
+                        <li>To develop effective interpersonal skills</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Introduction to Soft Skills and Communication</td>
+                            <td>Importance of Soft Skills, Basics of Communication, Communication Models</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Interpersonal Communication</td>
+                            <td>Building Rapport, Active Listening, Empathy</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <!-- Add all modules for STS101 -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Public Speaking Basics</td>
+                            <td>Overcoming Fear, Structuring a Speech, Audience Engagement</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Non-verbal Communication</td>
+                            <td>Body Language, Facial Expressions, Gestures</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Essentials of Grammar for Placement -1</td>
+                            <td>Parts of speech, Prepositions, Adjectives and Adverbs, Gerunds and Infinitives, Definite and Indefinite Articles, Compound Prepositional Phrases and Interrogatives, Synonyms and Antonyms, Analogous Pairing of Words</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Grooming</td>
+                            <td>Personal, Professional</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Effective Written Communication</td>
+                            <td>Email Etiquette, Report Writing, Professional Correspondence</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>Teamwork and Collaboration</td>
+                            <td>Roles in a Team, Conflict Resolution, Effective Meetings</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 9</td>
+                            <td>Problem-solving and Decision-making</td>
+                            <td>Critical Thinking, Creative Solutions, Decision-making Models</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 10</td>
+                            <td>Presentation Skills</td>
+                            <td>Designing Effective Presentations, Using Visual Aids, Practice Sessions</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 11</td>
+                            <td>Essentials of Grammar for Placement -2</td>
+                            <td>Tenses, Speech and Voice, Sentences Correction, Sentences Transformation, Sentences improvement, Idioms and Phrases, Root Words, Phrasal Verbs, Homonyms and Homophones, Sentence Synthesis</td>
+                            <td class="module-hours">7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- TTS101 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">TTS101</span>
+                        <span class="course-title">C++ Basics: Your Gateway to Programming</span>
+                    </div>
+                    <span class="course-hours">45 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Outcomes:</h4>
+                    <ul>
+                        <li>Proficiency in writing and understanding basic C++ programs</li>
+                        <li>Ability to implement control structures, functions, arrays, pointers, and OOP concepts in C++</li>
+                        <li>Skills to handle strings, dynamic memory allocation, and file I/O operations</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Course Overview and Environment Setup</td>
+                            <td>Introduction to C++, Installing MSYS2 and setting up the compiler, Setting up Visual Studio Code for C++</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Basic Syntax and Data Types</td>
+                            <td>Variables and data types, Basic operators, Input and output functions</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <!-- Add all modules for TTS101 -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Control Structures</td>
+                            <td>Conditional statements (if, else, switch), Loops (for, while, do-while)</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Functions</td>
+                            <td>Defining and calling functions, Function arguments and return values, Overloading functions</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Arrays and Pointers</td>
+                            <td>Creating and accessing arrays, Pointer basics, Pointer arithmetic</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Strings and Dynamic Memory Allocation</td>
+                            <td>String handling, Dynamic memory allocation with new and delete</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Object-Oriented Programming (OOP) Basics</td>
+                            <td>Classes and objects, Constructors and destructors, Encapsulation</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>Inheritance</td>
+                            <td>Superclasses and subclasses, Overriding methods, Access specifiers</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 9</td>
+                            <td>Polymorphism</td>
+                            <td>Virtual functions, Abstract classes and pure virtual functions</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 10</td>
+                            <td>Operator Overloading</td>
+                            <td>Overloading arithmetic and relational operators, Overloading stream insertion and extraction operators</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 11</td>
+                            <td>Exception Handling</td>
+                            <td>Try, catch, and throw statements, Creating custom exceptions</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 12</td>
+                            <td>Advanced File I/O</td>
+                            <td>Reading from and writing to files, File streams</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Semester 2 Courses -->
+        <section id="sem2" class="course-container">
+            <h2>Semester 2 Courses</h2>
+            
+            <!-- STS102 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">STS102</span>
+                        <span class="course-title">Mastering Soft Skills and Verbal Communication 2</span>
+                    </div>
+                    <span class="course-hours">45 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To advance verbal techniques</li>
+                        <li>To master group discussions and negotiations</li>
+                        <li>To refine presentation skills</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Advanced Communication Techniques</td>
+                            <td>Persuasive Speaking, Storytelling, Accent, Tone and Pitch Control</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Group Discussions</td>
+                            <td>Techniques and Strategies, Role Playing, Mock Group Discussions</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <!-- Add all modules for STS102 -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Negotiation Skills</td>
+                            <td>Negotiation Strategies, Bargaining Techniques, Conflict Management</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Brainstorming</td>
+                            <td>Introduction to Brainstorming, Brainstorming Techniques, Facilitating Effective</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Essentials of Comprehension for Placement-1</td>
+                            <td>Sentence Rearrangement, Para Jumbles, Paragraph Formation, Para Completion, Sentence Completion, Cloze Test</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Emotional Intelligence</td>
+                            <td>Self-awareness, Self-regulation, Social Skills</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Leadership Communication</td>
+                            <td>Leadership Styles, Motivational Speaking, Leading Teams</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>Cross-Cultural Communication</td>
+                            <td>Understanding Cultural Differences, Effective Communication in Diverse Teams, Cultural Sensitivity</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 9</td>
+                            <td>Interview, Resume Building</td>
+                            <td>Presentation of winning Resume with Cover Letter, Interview Skills, Mock Interview</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 10</td>
+                            <td>Essentials of Comprehension for Placement-2</td>
+                            <td>Fact Inference and Judgement, Passage Inference, Reading Comprehension</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- TTS102J -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">TTS102J</span>
+                        <span class="course-title">Code Mastery: Java Essentials</span>
+                    </div>
+                    <span class="course-hours">45 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To provide a comprehensive introduction to Java programming</li>
+                        <li>To equip students with the skills necessary to write, debug, and maintain Java code</li>
+                        <li>To cover fundamental and advanced Java concepts including OOP, error handling, file I/O, multithreading, and GUI application development</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Course Overview and Java Installation</td>
+                            <td>Introduction to Java, Installing JDK, Writing and running your first Java program</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Basic Syntax and Data Types</td>
+                            <td>Variables and data types, Basic operators, Input and output functions</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <!-- Add all modules for TTS102J -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Control Structures</td>
+                            <td>Conditional statements (if, else, switch), Loops (for, while, do-while)</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Methods</td>
+                            <td>Defining and calling methods, Method arguments and return values, Overloading methods</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Arrays and Strings</td>
+                            <td>Creating and accessing arrays, Array methods, String operations and methods</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Object-Oriented Programming</td>
+                            <td>Classes and objects, Constructors, Encapsulation</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Inheritance and Polymorphism</td>
+                            <td>Superclasses and subclasses, Method overriding, Polymorphism concepts</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>Abstract Classes and Interfaces</td>
+                            <td>Abstract classes, Implementing interfaces</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 9</td>
+                            <td>Exception Handling</td>
+                            <td>Try, catch, and finally blocks, Creating custom exceptions</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 10</td>
+                            <td>Collections Framework</td>
+                            <td>List, Set, and Map interfaces, Using ArrayList, HashSet, and HashMap</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                        <tr>
+                            <td>Module 11</td>
+                            <td>File I/O</td>
+                            <td>Reading from and writing to files, Working with different file types</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 12</td>
+                            <td>Regular Expressions</td>
+                            <td>Regex Syntax, Searching/Matching Patterns</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 13</td>
+                            <td>Multithreading</td>
+                            <td>Creating and running threads, Synchronization</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 14</td>
+                            <td>Lambda Expressions and Stream API</td>
+                            <td>Understanding lambda expressions, Using the Stream API for data processing</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 15</td>
+                            <td>Working with Databases</td>
+                            <td>JDBC for database connectivity, CRUD operations</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- TTS102P -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">TTS102P</span>
+                        <span class="course-title">Code Mastery: Python Essentials</span>
+                    </div>
+                    <span class="course-hours">45 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To provide a comprehensive introduction to Python programming</li>
+                        <li>To equip students with the skills necessary to write, debug, and maintain Python code</li>
+                        <li>To cover fundamental and advanced Python concepts including OOP, error handling, file I/O, and working with libraries</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Course Overview and Installation</td>
+                            <td>Introduction to Python, Installing Python, First Program</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Basic Syntax and Data Types</td>
+                            <td>Variables, Data Types, Basic Operators, Input/Output</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <!-- Add all modules for TTS102P -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Control Structures</td>
+                            <td>Conditional Statements, Loops</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Functions</td>
+                            <td>Defining/Calling Functions, Arguments, Return Values, Lambdas</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Lists and Tuples</td>
+                            <td>Creating/Accessing Lists and Tuples, Methods, Comprehensions</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Dictionaries and Sets</td>
+                            <td>Creating/Accessing Dictionaries and Sets, Methods</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Strings and String Manipulation</td>
+                            <td>String Operations, Methods, Formatting</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>File Handling</td>
+                            <td>Reading/Writing Files, Working with TXT, CSV, JSON</td>
+                            <td class="module-hours">2</td>
+                        </tr>
+                        <tr>
+                            <td>Module 9</td>
+                            <td>Error Handling</td>
+                            <td>Exception Handling, Try/Except/Finally, Raising Exceptions</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 10</td>
+                            <td>Modules and Packages</td>
+                            <td>Importing Modules, Creating/Using Packages, Standard Libraries</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 11</td>
+                            <td>Working with Libraries</td>
+                            <td>NumPy for Numerical Computations, Pandas for Data Manipulation</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 12</td>
+                            <td>Object-Oriented Programming</td>
+                            <td>Classes/Objects, Inheritance, Polymorphism</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 13</td>
+                            <td>Advanced OOP Concepts</td>
+                            <td>Encapsulation, Abstraction, Special Methods, Operator Overloading</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 14</td>
+                            <td>Iterators and Generators</td>
+                            <td>Creating/Using Iterators, Generator Functions/Expressions</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 15</td>
+                            <td>Decorators and Context Managers</td>
+                            <td>Function/Class Decorators, Using Context Managers</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                        <tr>
+                            <td>Module 16</td>
+                            <td>Regular Expressions</td>
+                            <td>Regex Syntax, Searching/Matching Patterns</td>
+                            <td class="module-hours">1</td>
+                        </tr>
+                        <tr>
+                            <td>Module 17</td>
+                            <td>Working with APIs</td>
+                            <td>Introduction to APIs, Making HTTP Requests with Requests Library</td>
+                            <td class="module-hours">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Semester 3 Courses -->
+        <section id="sem3" class="course-container">
+            <h2>Semester 3 Courses</h2>
+            
+            <!-- ATS301 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">ATS301</span>
+                        <span class="course-title">Aptitude Ascend: Building Your Foundation</span>
+                    </div>
+                    <span class="course-hours">45 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To build a strong foundation in aptitude skills</li>
+                        <li>To enhance problem-solving abilities</li>
+                        <li>To prepare for competitive exams and assessments</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Vedic Maths</td>
+                            <td>Basics of Vedic Maths, Techniques for addition and subtraction, Techniques for multiplication and division, Squaring and cubing, solving equations using Vedic methods</td>
+                            <td class="module-hours">9</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Deductive Reasoning</td>
+                            <td>Syllogisms, Analogies, Series Completion, Coding-Decoding</td>
+                            <td class="module-hours">7</td>
+                        </tr>
+                        <!-- Add all modules for ATS301 -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Intermediate Arithmetic</td>
+                            <td>Number Patterns and Sequences, Fractions, Decimals, and Percentages, Ratio and Proportion, Average and Percentage, Age Problems, Cryptarithmetic</td>
+                            <td class="module-hours">13</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Relationships and Arrangements</td>
+                            <td>Blood Relations, Direction Sense, Seating Arrangements</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Problem-Solving Strategies</td>
+                            <td>Puzzle-solving Strategies, Critical Thinking Exercises</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Data Handling</td>
+                            <td>Data Interpretation - Tables and Charts, Data Sufficiency, Statistics and Data Analysis</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- TTS301 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <div>
+                        <span class="course-code">TTS301</span>
+                        <span class="course-title">Advanced Competitive Coding-1</span>
+                    </div>
+                    <span class="course-hours">45 Hours</span>
+                </div>
+                
+                <div class="course-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To enhance problem-solving skills for competitive programming</li>
+                        <li>To introduce advanced algorithms and techniques in Java</li>
+                        <li>To solve complex mathematical, string, array, and graph problems using efficient algorithms</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Algorithms</td>
+                            <td>Java Introduction, Features, Structure, Data Types, Basic I/O Operators, Decision making and Control structure, Time & Space complexity</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Math-based problems and Bitwise algorithms</td>
+                            <td>Simple Sieve, Segmented & Incremental Sieve, Euler's phi Algorithm, Strobogrammatic Number, Remainder Theorem, Toggle the switch & Alice Apple tree, Binary Palindrome, Booth's Algorithm, Euclid's Algorithm, Karatsuba Algorithm, Longest Sequence of 1 after flipping a bit, Swap two nibbles in a byte</td>
+                            <td class="module-hours">13</td>
+                        </tr>
+                    
