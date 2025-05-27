@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillzen Institute - Prime Fit Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #1a237e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a237e, #4a148c);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Program Tabs */
+        .program-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            border-bottom: 2px solid #eee;
+        }
+
+        .program-tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #666;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .program-tab.active {
+            color: #1a237e;
+        }
+
+        .program-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ff6d00;
+        }
+
+        /* Program Content */
+        .program-content {
+            display: none;
+        }
+
+        .program-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .program-card h3 {
+            color: #1a237e;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .program-objectives {
+            margin-bottom: 30px;
+        }
+
+        .program-objectives li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .program-objectives li:before {
+            content: "•";
+            color: #ff6d00;
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modules-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .modules-table th, .modules-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modules-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .modules-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .module-hours {
+            text-align: center;
+            color: #666;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff6d00;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff9100;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,109,0,0.3);
+        }
+
+        /* Highlights */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .highlight-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+            color: #1a237e;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0f2e;
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .program-tabs {
+                flex-direction: column;
+            }
+            
+            .program-tab {
+                text-align: center;
+                padding: 15px;
+            }
+            
+            .modules-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+           <header style="background: linear-gradient(120deg, #7b1fa2 0%, #3a237a 30%, #cc99ff 70%, #ffcccc 100%); color: white; text-align: center; padding: 90px 20px 60px 20px; position: relative; overflow: hidden; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px; box-shadow: 0 8px 32px rgba(123,31,162,0.12);">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 10px;">
+                <h1>Prime Fit Program</h1>
+            </div>
+            <p>Specialized training for mid-tier company aspirants with focus on core technical skills and aptitude mastery</p>
+            <a href="index.html" class="btn" style="margin-top:18px;">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Program Tabs -->
+        <div class="program-tabs">
+            <button class="program-tab active" onclick="showProgram('technical')">Technical Track</button>
+            <button class="program-tab" onclick="showProgram('aptitude')">Aptitude Track</button>
+        </div>
+
+        <!-- Technical Track -->
+        <section id="technical" class="program-content active">
+            <div class="program-card">
+                <h3>Technical Training</h3>
+                
+                <div class="program-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To enhance problem-solving skills for competitive programming</li>
+                        <li>To introduce advanced algorithms and techniques in Java</li>
+                        <li>To solve complex mathematical, string, array, and graph problems using efficient algorithms</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Algorithms</td>
+                            <td>Java Introduction, Features, Structure, Data Types, Basic I/O Operators, Decision making and Control structure, Time & Space complexity</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Math-based problems and Bitwise algorithms</td>
+                            <td>Simple Sieve, Segmented & Incremental Sieve, Euler's phi Algorithm, Strobogrammatic Number, Remainder Theorem, Toggle the switch & Alice Apple tree, Binary Palindrome, Booth's Algorithm, Euclid's Algorithm, Karatsuba Algorithm, Longest Sequence of 1 after flipping a bit, Swap two nibbles in a byte</td>
+                            <td class="module-hours">13</td>
+                        </tr>
+                        <!-- Add all modules for Technical Track -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Arrays, Searching, Sorting and Strings</td>
+                            <td>Block Swap Algorithm, Max product subarray, Maximum sum of hour glass in matrix, Max Equilibrium Sum, Leaders in array, Majority element, Lexicographically first palindromic string, Natural Sort order, Weighted substring, Move hyphen to beginning, Manacher's Algorithm</td>
+                            <td class="module-hours">12</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Recursion, Backtracking, Greedy Algorithm</td>
+                            <td>Sorted Unique Permutation, Maneuvering, Combination, Josephus trap, Maze Solving, N Queens Problem, Warnsdorff's Algorithm, Hamiltonian Cycle, Kruskal's Algorithm, Activity Selection Problem, Graph Coloring, Huffman Coding</td>
+                            <td class="module-hours">14</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Dynamic Programming</td>
+                            <td>Longest Common Subsequence, Longest Increasing Subsequence, Longest Bitonic Subsequence, Longest Palindromic Subsequence, Subset sum problem, 0-1 Knapsack, Traveling Salesman, Coin Change, Shortest Common Supersequence, Levenshtein Distance problem, Rod Cutting problem, Wildcard pattern matching, Pots of gold game</td>
+                            <td class="module-hours">15</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Linked List, Stack, Queue</td>
+                            <td>Loop Detection, Sort the bitonic DLL, Segregate even & odd nodes in a LL, Merge sort for DLL, Minimum Stack, The Celebrity problem, Iterative Tower of Hanoi, Stock Span problem, Priority Queue using DLL, Sort without extra Space, Max Sliding Window, Stack permutations</td>
+                            <td class="module-hours">15</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Trees, Graphs, Heaps, Maps</td>
+                            <td>Recover the BST, Views of tree, Vertical order traversal, Boundary traversal, BFS, DFS, Dial's Algorithm, Bellman-Ford Algorithm, Topological Sort, Heap Sort, Binomial heap, K-array heap, Winner tree, Hash Map to Tree Map</td>
+                            <td class="module-hours">10</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>Interview Preparation</td>
+                            <td>Networking, Security, Operating Systems, Database Management Systems</td>
+                            <td class="module-hours">5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4>Technical Mastery</h4>
+                    <p>Comprehensive coverage of data structures, algorithms, and problem-solving techniques</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h4>Real-world Projects</h4>
+                    <p>Hands-on implementation of concepts through practical projects</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>Interview Prep</h4>
+                    <p>Special modules focused on technical interview preparation</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aptitude Track -->
+        <section id="aptitude" class="program-content">
+            <div class="program-card">
+                <h3>Aptitude Training</h3>
+                
+                <div class="program-objectives">
+                    <h4>Course Objectives:</h4>
+                    <ul>
+                        <li>To build a strong foundation in aptitude skills</li>
+                        <li>To enhance problem-solving abilities</li>
+                        <li>To prepare for competitive exams and assessments</li>
+                    </ul>
+                </div>
+                
+                <table class="modules-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Module Name</th>
+                            <th>Description</th>
+                            <th class="module-hours">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module 1</td>
+                            <td>Vedic Maths</td>
+                            <td>Basics of Vedic Maths, Techniques for addition and subtraction, Techniques for multiplication and division, Squaring and cubing, solving equations using Vedic methods</td>
+                            <td class="module-hours">9</td>
+                        </tr>
+                        <tr>
+                            <td>Module 2</td>
+                            <td>Deductive Reasoning</td>
+                            <td>Syllogisms, Analogies, Series Completion, Coding-Decoding</td>
+                            <td class="module-hours">7</td>
+                        </tr>
+                        <!-- Add all modules for Aptitude Track -->
+                        <tr>
+                            <td>Module 3</td>
+                            <td>Intermediate Arithmetic</td>
+                            <td>Number Patterns and Sequences, Fractions, Decimals, and Percentages, Ratio and Proportion, Average and Percentage, Age Problems, Cryptarithmetic</td>
+                            <td class="module-hours">13</td>
+                        </tr>
+                        <tr>
+                            <td>Module 4</td>
+                            <td>Relationships and Arrangements</td>
+                            <td>Blood Relations, Direction Sense, Seating Arrangements</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 5</td>
+                            <td>Problem-Solving Strategies</td>
+                            <td>Puzzle-solving Strategies, Critical Thinking Exercises</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 6</td>
+                            <td>Data Handling</td>
+                            <td>Data Interpretation - Tables and Charts, Data Sufficiency, Statistics and Data Analysis</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 7</td>
+                            <td>Applied Arithmetic</td>
+                            <td>Profit and Loss, Simple and Compound Interest, Time, Speed, and Distance, Time and Work, Pipes and Cisterns, Partnership, Mixtures and Allegations</td>
+                            <td class="module-hours">15</td>
+                        </tr>
+                        <tr>
+                            <td>Module 8</td>
+                            <td>Visual Reasoning</td>
+                            <td>Non-Verbal Reasoning - Visual Patterns, Cubes and Dice, Logical Venn Diagrams</td>
+                            <td class="module-hours">6</td>
+                        </tr>
+                        <tr>
+                            <td>Module 9</td>
+                            <td>Geometry</td>
+                            <td>Mensuration - Area and Volume, Geometry - Basic Shapes and Figures, Geometry - Triangles and Quadrilaterals, Geometry - Circles and Polygons, Coordinate Geometry, Analytical Geometry</td>
+                            <td class="module-hours">9</td>
+                        </tr>
+                        <tr>
+                            <td>Module 10</td>
+                            <td>Logical Statements</td>
+                            <td>Logical Connectives, Statement and Assumptions, Statement and Conclusions, Cause and Effect Analysis, Decision Making</td>
+                            <td class="module-hours">8</td>
+                        </tr>
+                        <tr>
+                            <td>Module 11</td>
+                            <td>Time and Sequence</td>
+                            <td>Clocks and Calendars, Number and Letter Series</td>
+                            <td class="module-hours">4</td>
+                        </tr>
+                        <tr>
+                            <td>Module 12</td>
+                            <td>Data Analysis</td>
+                            <td>Data Sufficiency, Analytical Reasoning</td>
+                            <td class="module-hours">3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4>Quantitative Mastery</h4>
+                    <p>Comprehensive coverage of arithmetic, algebra, geometry, and data interpretation</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Logical Reasoning</h4>
+                    <p>Systematic approach to solving complex logical problems</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <h4>Speed & Accuracy</h4>
+                    <p>Special techniques to improve problem-solving speed without compromising accuracy</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Highlights -->
+        <section>
+            <h2>Why Choose Prime Fit?</h2>
+            <div class="highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h4>Mid-Tier Focus</h4>
+                    <p>Specifically designed for students targeting mid-tier companies</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Balanced Curriculum</h4>
+                    <p>Perfect blend of technical and aptitude training</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h4>Placement Support</h4>
+                    <p>Dedicated placement assistance and interview preparation</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: linear-gradient(120deg, #3a237a 0%, #7b1fa2 30%, #cc99ff 70%, #ffcccc 100%); color: white; padding: 60px 0 20px; border-top-left-radius: 40px; border-top-right-radius: 40px; box-shadow: 0 -4px 32px rgba(44,19,59,0.10); margin-top: 60px;">
+        <div class="container">
+            <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 32px;">
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px;">
+                    <h3 style="background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 20px; font-size: 1.3rem;">Skillzen Institute</h3>
+                    <p style="color:#e0e0e0;">Your Pathway to Placement Excellence</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px; text-align: right;">
+                    <h3 style="background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 20px; font-size: 1.3rem;">Contact Us</h3>
+                    <ul style="list-style: none; padding-left: 0; color:#e0e0e0;">
+                        <li><i class="fas fa-phone"></i> +91-XXXXXX5678</li>
+                        <li><i class="fas fa-envelope"></i> training@skillzeninstitute.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Chennai</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright" style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(44,19,59,0.15); background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; font-size: 0.9rem;">
+                <p>&copy; 2023 Skillzen Institute Pvt Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showProgram(programId) {
+            // Hide all program contents
+            document.querySelectorAll('.program-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Deactivate all program tabs
+            document.querySelectorAll('.program-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected program and activate tab
+            document.getElementById(programId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

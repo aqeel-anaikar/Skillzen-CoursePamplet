@@ -594,7 +594,7 @@
                         <li><strong>Basic Aptitude & Reasoning</strong></li>
                         <li><strong>HR Interview Strategies</strong></li>
                     </ul>
-                    <a href="#" class="btn" onclick="return showLoaderAndNavigate(event, '#')">View Course</a>
+                    <a href="prime-fit.html" class="btn" onclick="return showLoaderAndNavigate(event, 'prime-fit.html')">View Course</a>
                 </div>
             </div>
             
@@ -765,21 +765,104 @@
         </div>
     </section>
 
-    <!-- About LMS Section -->
+    <!-- About LMS Section (Carousel, Auto, Swipe/Drag) -->
     <section class="about-lms" id="about-lms" style="background:linear-gradient(120deg,#181a20 60%,#23243a 100%);padding:64px 0 56px 0;">
-        <div class="container" style="text-align:center; max-width: 800px; color:#fff;">
-            <img src="Learnspire-Logo1.jpg" alt="Learnspire.AI Logo" style="width:90px;height:90px;object-fit:contain;border-radius:18px;background:#23243a;box-shadow:0 4px 32px #7b1fa2a0;margin-bottom:24px;">
-            <h2 style="color:#e040fb; margin-bottom:18px;letter-spacing:1px;">About Our LMS: Learnspire.AI</h2>
-            <p style="font-size:1.18rem; color:#e0e0e0; margin-bottom:18px;">Skillzen Institute empowers students and educators with <strong style="color:#fff;">Learnspire.AI</strong>, our next-generation Learning Management System (LMS). Learnspire.AI delivers a seamless, interactive, and personalized learning experience for all users.</p>
-            <ul style="text-align:left; display:inline-block; margin:0 auto 18px auto; color:#bdbdbd; font-size:1.08rem; line-height:1.8; background:rgba(36,37,54,0.7); border-radius:14px; padding:18px 28px 18px 32px; box-shadow:0 2px 12px #23243a55;">
-                <li><strong style="color:#e040fb;">AI-Powered Adaptive Learning</strong> for every student</li>
-                <li>Live classes, assignments, and progress tracking in one place</li>
-                <li>Mobile-friendly and accessible 24/7</li>
-                <li>Integrated coding labs, quizzes, and discussion forums</li>
-                <li>Analytics dashboard for students and faculty</li>
-            </ul>
-            <a href="https://home.learnspire.ai/" class="btn" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#e040fb 60%,#7b1fa2 100%);color:#fff;border:none;box-shadow:0 2px 8px #e040fb55;">Explore Learnspire.AI</a>
+        <div class="container" style="text-align:center; max-width: 800px; color:#fff; position:relative;">
+            <div id="lms-carousel" style="overflow:hidden;touch-action:pan-x;user-select:none;">
+                <!-- Slide 1: About Our LMS -->
+                <div class="lms-slide lms-slide-active" style="transition:opacity 0.5s;">
+                    <img src="Learnspire-Logo1.jpg" alt="Learnspire.AI Logo" style="width:90px;height:90px;object-fit:contain;border-radius:18px;background:#23243a;box-shadow:0 4px 32px #7b1fa2a0;margin-bottom:24px;">
+                    <h2 style="color:#e040fb; margin-bottom:18px;letter-spacing:1px;">About Our LMS: Learnspire.AI</h2>
+                    <p style="font-size:1.18rem; color:#e0e0e0; margin-bottom:18px;">Skillzen Institute empowers students and educators with <strong style="color:#fff;">Learnspire.AI</strong>, our next-generation Learning Management System (LMS). Learnspire.AI delivers a seamless, interactive, and personalized learning experience for all users.</p>
+                    <ul style="text-align:left; display:inline-block; margin:0 auto 18px auto; color:#bdbdbd; font-size:1.08rem; line-height:1.8; background:rgba(36,37,54,0.7); border-radius:14px; padding:18px 28px 18px 32px; box-shadow:0 2px 12px #23243a55;">
+                        <li><strong style="color:#e040fb;">AI-Powered Adaptive Learning</strong> for every student</li>
+                        <li>Live classes, assignments, and progress tracking in one place</li>
+                        <li>Mobile-friendly and accessible 24/7</li>
+                        <li>Integrated coding labs, quizzes, and discussion forums</li>
+                        <li>Analytics dashboard for students and faculty</li>
+                    </ul>
+                    <a href="https://home.learnspire.ai/" class="btn" target="_blank" rel="noopener" style="background:linear-gradient(90deg,#e040fb 60%,#7b1fa2 100%);color:#fff;border:none;box-shadow:0 2px 8px #e040fb55;">Explore Learnspire.AI</a>
+                </div>
+                <!-- Slide 2: Coding Image & Description -->
+                <div class="lms-slide" style="display:none;transition:opacity 0.5s;">
+                    <img src="LMS-coding.png" alt="Learnspire Coding" style="width:100%;max-width:420px;height:auto;object-fit:contain;border-radius:18px;background:#23243a;box-shadow:0 4px 32px #7b1fa2a0;margin-bottom:24px;">
+                    <h2 style="color:#e040fb; margin-bottom:18px;letter-spacing:1px;">Interactive Coding Labs</h2>
+                    <p style="font-size:1.15rem; color:#e0e0e0; margin-bottom:18px;">Practice coding in real time with our integrated labs. <strong style="color:#fff;">Learnspire.AI</strong> offers hands-on programming, instant feedback, and a collaborative environment to help you master technical skills for placements and beyond.</p>
+                    <ul style="text-align:left; display:inline-block; margin:0 auto 18px auto; color:#bdbdbd; font-size:1.08rem; line-height:1.8; background:rgba(36,37,54,0.7); border-radius:14px; padding:18px 28px 18px 32px; box-shadow:0 2px 12px #23243a55;">
+                        <li>Real-time code execution and error checking</li>
+                        <li>Project-based learning and mini-hackathons</li>
+                        <li>Peer and mentor feedback on your code</li>
+                        <li>Track your coding progress and achievements</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Carousel Dots Only -->
+            <div style="margin-top:18px;display:flex;justify-content:center;gap:8px;align-items:center;">
+                <span class="lms-dot lms-dot-active" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#e040fb;opacity:0.8;cursor:pointer;"></span>
+                <span class="lms-dot" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#e0e0e0;opacity:0.5;cursor:pointer;"></span>
+            </div>
         </div>
+        <script>
+            (function(){
+                var slides = document.querySelectorAll('.lms-slide');
+                var dots = document.querySelectorAll('.lms-dot');
+                var current = 0;
+                var autoTimer = null;
+                var startX = null, isDragging = false;
+                function showSlide(idx) {
+                    slides.forEach(function(slide,i){
+                        slide.style.display = (i===idx)?'block':'none';
+                        slide.classList.toggle('lms-slide-active', i===idx);
+                    });
+                    dots.forEach(function(dot,i){
+                        dot.classList.toggle('lms-dot-active', i===idx);
+                        dot.style.background = i===idx ? '#e040fb' : '#e0e0e0';
+                        dot.style.opacity = i===idx ? '0.8' : '0.5';
+                    });
+                    current = idx;
+                }
+                function nextSlide() { showSlide((current+1)%slides.length); }
+                function prevSlide() { showSlide((current+slides.length-1)%slides.length); }
+                function startAuto() {
+                    if(autoTimer) clearInterval(autoTimer);
+                    autoTimer = setInterval(nextSlide, 5000);
+                }
+                // Touch/Mouse drag events
+                var carousel = document.getElementById('lms-carousel');
+                carousel.addEventListener('touchstart', function(e){
+                    if(e.touches.length===1) startX = e.touches[0].clientX;
+                    isDragging = true;
+                });
+                carousel.addEventListener('touchmove', function(e){
+                    if(!isDragging || e.touches.length!==1) return;
+                    var dx = e.touches[0].clientX - startX;
+                    if(Math.abs(dx)>40) {
+                        if(dx<0) nextSlide(); else prevSlide();
+                        isDragging = false;
+                        startAuto();
+                    }
+                });
+                carousel.addEventListener('touchend', function(){ isDragging = false; });
+                // Mouse drag
+                carousel.addEventListener('mousedown', function(e){ startX = e.clientX; isDragging = true; });
+                carousel.addEventListener('mousemove', function(e){
+                    if(!isDragging) return;
+                    var dx = e.clientX - startX;
+                    if(Math.abs(dx)>40) {
+                        if(dx<0) nextSlide(); else prevSlide();
+                        isDragging = false;
+                        startAuto();
+                    }
+                });
+                carousel.addEventListener('mouseup', function(){ isDragging = false; });
+                carousel.addEventListener('mouseleave', function(){ isDragging = false; });
+                // Dots click
+                dots[0].onclick = function(){ showSlide(0); startAuto(); };
+                dots[1].onclick = function(){ showSlide(1); startAuto(); };
+                showSlide(0);
+                startAuto();
+            })();
+        </script>
     </section>
 
     <!-- Footer -->
