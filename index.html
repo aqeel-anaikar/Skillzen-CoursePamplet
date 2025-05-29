@@ -461,6 +461,17 @@
     </style>
 </head>
 <body>
+    <!-- Authentication Check: Redirect if not logged in -->
+    <script>
+        // Place this at the very top of the <body> (or as early as possible)
+        (function() {
+            // Only allow access if sessionStorage key is set
+            if (!sessionStorage.getItem('skillzen_owner_logged_in')) {
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+
     <!-- Loading Screen -->
     <div id="loader-bg" style="position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(120deg,#cc99ff 0%,#9999ff 40%,#ccffcc 70%,#ffcccc 100%);display:flex;align-items:center;justify-content:center;transition:opacity 0.6s;">
         <div style="text-align:center;">
@@ -495,6 +506,9 @@
             <p>Your Pathway to Placement Excellence</p>
             <p>Training Students from 1st Year to Final Year for Campus Recruitment Success</p>
             <a href="#programs" class="btn">Explore Programs</a>
+        </div>
+        <div style="position: absolute; top: 32px; right: 40px; z-index: 20;">
+            <button id="logout-btn" style="padding: 10px 28px; border-radius: 22px; background: linear-gradient(90deg,#cc99ff,#99ccff); color: #222; border:none; font-weight: 600; font-size: 1.05rem; cursor:pointer; box-shadow:0 2px 8px #0001; transition: background 0.3s;">Logout</button>
         </div>
     </header>
 
@@ -889,7 +903,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
+            <div class="footer-left" style="display: flex; align-items: center; justify-content: space-between; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
+                <div class="footer-logo" style="display: flex; align-items: center; gap: 12px;">
+                    <img src="assets/skillzen-logo.png" alt="Skillzen Logo" class="footer-logo" style="width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.1); padding: 4px;">
+                    <span class="footer-tagline" style="color: #fff; font-size: 0.9rem;">Skillzen Institute &mdash; Empowering Future Innovators</span>
+                </div>
+                <div class="footer-right" style="display: flex; align-items: center;">
+                    <a href="mailto:info@skillzen.in" class="footer-contact" style="color: #e0e0e0; text-decoration: none; font-size: 0.9rem; margin-right: 1.5rem;">Contact Us</a>
+                    <button id="logout-btn" style="background: linear-gradient(90deg,#cc99ff,#99ccff); color: #222; border:none; border-radius: 20px; padding: 0.5rem 1.2rem; font-weight: 600; cursor:pointer; box-shadow:0 2px 8px #0001; transition: background 0.3s;">Logout</button>
+                </div>
+            </div>
+            <div class="copyright" style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(44,19,59,0.15); background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; font-size: 0.9rem;">
                 <p>&copy; 2023 Skillzen Institute Pvt Ltd. All rights reserved.</p>
             </div>
         </div>
@@ -971,6 +995,15 @@
                 window.location.href = url;
             }, 900); // Show loader for 0.9s before navigating
             return false;
+        }
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                sessionStorage.removeItem('skillzen_owner_logged_in');
+                window.location.href = 'login.html';
+            });
         }
     </script>
 </body>

@@ -261,6 +261,15 @@
     </style>
 </head>
 <body>
+    <!-- Authentication Check: Redirect if not logged in -->
+<script>
+    (function() {
+        if (!sessionStorage.getItem('skillzen_owner_logged_in')) {
+            window.location.href = 'login.html';
+        }
+    })();
+</script>
+
     <!-- Header -->
         <header style="background: linear-gradient(120deg, #7b1fa2 0%, #3a237a 30%, #cc99ff 70%, #ffcccc 100%); color: white; text-align: center; padding: 90px 20px 60px 20px; position: relative; overflow: hidden; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px; box-shadow: 0 8px 32px rgba(123,31,162,0.12);">
         <div class="container" style="display: flex; flex-direction: column; align-items: center;">
@@ -1231,6 +1240,15 @@
             document.getElementById(semesterId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
+
+        // Logout functionality
+const logoutBtn = document.getElementById('logout-btn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+        sessionStorage.removeItem('skillzen_owner_logged_in');
+        window.location.href = 'login.html';
+    });
+}
     </script>
 </body>
 </html>

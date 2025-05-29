@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillzen Owner Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="Logo1.png">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #cc99ff 0%, #9999ff 40%, #ccffcc 70%, #ffcccc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lato', 'Poppins', sans-serif;
+        }
+        .login-container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(123,31,162,0.13);
+            padding: 48px 32px 36px 32px;
+            max-width: 370px;
+            width: 100%;
+            text-align: center;
+        }
+        .login-container img {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: #fff;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px #7b1fa2a0;
+        }
+        .login-container h2 {
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            background: linear-gradient(90deg, #7b1fa2 10%, #cc99ff 60%, #2d133b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .login-container input {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1.5px solid #cc99ff;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .login-container input:focus {
+            border: 1.5px solid #7b1fa2;
+        }
+        .login-container button {
+            padding: 12px 0;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #2d133b 60%, #3a237a 100%);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-shadow: 0 2px 8px #2d133b33;
+        }
+        .login-container button:hover {
+            background: linear-gradient(90deg, #cc99ff 60%, #9999ff 100%);
+            color: #2d133b;
+        }
+        .login-error {
+            color: #e040fb;
+            font-size: 1rem;
+            margin-top: 8px;
+            min-height: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div style="position: absolute; top: 24px; right: 32px; z-index: 10;">
+        <button id="logout-btn" style="padding: 8px 22px; border-radius: 20px; background: linear-gradient(90deg,#cc99ff,#99ccff); color: #222; border:none; font-weight: 600; font-size: 1rem; cursor:pointer; box-shadow:0 2px 8px #0001; transition: background 0.3s;">Logout</button>
+    </div>
+    <div class="login-container">
+        <img src="Logo1.png" alt="Skillzen Logo">
+        <h2>Owner Login</h2>
+        <form id="loginForm" autocomplete="off">
+            <input type="text" id="username" placeholder="Username" required autofocus>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="login-error" id="loginError"></div>
+        </form>
+    </div>
+    <script>
+        // Hardcoded credentials (change as needed)
+        const OWNER_USERNAME = 'owner';
+        const OWNER_PASSWORD = 'Skillzen@2025'; // Change this to your secure password
+
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            if(username === OWNER_USERNAME && password === OWNER_PASSWORD) {
+                // Save login state (sessionStorage for security)
+                sessionStorage.setItem('skillzen_owner_logged_in', 'true');
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('loginError').textContent = 'Invalid credentials. Please try again.';
+            }
+        };
+
+        // Logout functionality for login page
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                sessionStorage.removeItem('skillzen_owner_logged_in');
+                window.location.reload();
+            });
+        }
+    </script>
+</body>
+</html>
