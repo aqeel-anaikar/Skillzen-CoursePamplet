@@ -354,289 +354,271 @@
             <p>Click on any trainer to view their full profile and expertise</p>
             
             <div class="trainers-grid">
-                <!-- Trainer 1 -->
-                <div class="trainer-card" onclick="openModal('modal1')">
-                    <div class="trainer-image" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');">
-                        <div class="trainer-overlay">
-                            <h3>Rajesh Kumar</h3>
-                            <p>Senior Technical Trainer</p>
-                        </div>
-                    </div>
-                    <div class="trainer-info">
-                        <p>10+ years experience in Java, Spring Boot, and Microservices</p>
-                        <span class="trainer-specialty">Java Expert</span>
-                    </div>
-                </div>
-                
-                <!-- Trainer 2 -->
-                <div class="trainer-card" onclick="openModal('modal2')">
-                    <div class="trainer-image" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');">
-                        <div class="trainer-overlay">
-                            <h3>Priya Sharma</h3>
-                            <p>Data Science Lead</p>
-                        </div>
-                    </div>
-                    <div class="trainer-info">
-                        <p>8+ years in Machine Learning and AI implementations</p>
-                        <span class="trainer-specialty">AI/ML Specialist</span>
-                    </div>
-                </div>
-                
-                <!-- Trainer 3 -->
-                <div class="trainer-card" onclick="openModal('modal3')">
-                    <div class="trainer-image" style="background-image: url('https://randomuser.me/api/portraits/men/75.jpg');">
-                        <div class="trainer-overlay">
-                            <h3>Amit Patel</h3>
-                            <p>Python Architect</p>
-                        </div>
-                    </div>
-                    <div class="trainer-info">
-                        <p>12+ years building scalable Python applications</p>
-                        <span class="trainer-specialty">Python Guru</span>
-                    </div>
-                </div>
-                
-                <!-- Trainer 4 -->
-                <div class="trainer-card" onclick="openModal('modal4')">
-                    <div class="trainer-image" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg');">
-                        <div class="trainer-overlay">
-                            <h3>Neha Gupta</h3>
-                            <p>Aptitude Specialist</p>
-                        </div>
-                    </div>
-                    <div class="trainer-info">
-                        <p>Helped 1000+ students crack competitive exams</p>
-                        <span class="trainer-specialty">Quantitative Expert</span>
-                    </div>
-                </div>
-                
-                <!-- Trainer 5 -->
-                <div class="trainer-card" onclick="openModal('modal5')">
-                    <div class="trainer-image" style="background-image: url('https://randomuser.me/api/portraits/men/91.jpg');">
-                        <div class="trainer-overlay">
-                            <h3>Sanjay Verma</h3>
-                            <p>C++ Systems Expert</p>
-                        </div>
-                    </div>
-                    <div class="trainer-info">
-                        <p>15+ years in system programming and low-level optimizations</p>
-                        <span class="trainer-specialty">C++ Veteran</span>
-                    </div>
-                </div>
-                
-                <!-- Trainer 6 -->
-                <div class="trainer-card" onclick="openModal('modal6')">
-                    <div class="trainer-image" style="background-image: url('https://randomuser.me/api/portraits/women/33.jpg');">
-                        <div class="trainer-overlay">
-                            <h3>Ananya Reddy</h3>
-                            <p>Soft Skills Coach</p>
-                        </div>
-                    </div>
-                    <div class="trainer-info">
-                        <p>Corporate trainer with Fortune 500 experience</p>
-                        <span class="trainer-specialty">Communication Expert</span>
-                    </div>
-                </div>
+                <!-- Trainer cards will be rendered here by JavaScript -->
+            </div>
+        </section>
+
+        <section style="margin-bottom: 32px;">
+            <div class="container" style="display: flex; justify-content: flex-end; gap: 18px; align-items: center;">
+                <button id="addTrainerBtn" title="Add Trainer" style="background: #4caf50; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px #4caf5040;">+</button>
+                <button id="removeTrainerBtn" title="Remove Trainer" style="background: #e040fb; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px #e040fb40;">&minus;</button>
             </div>
         </section>
     </main>
 
-    <!-- Trainer Modals -->
-    <!-- Modal 1 -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="trainer-profile">
-                <div class="profile-image" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
-                <div class="profile-details">
-                    <div class="profile-header">
-                        <h2>Rajesh Kumar</h2>
-                        <p class="trainer-specialty" style="display: inline-block; margin-top: 0;">Java Expert</p>
-                        <p>Senior Technical Trainer | 10+ years experience</p>
-                    </div>
-                    
-                    <div class="profile-stats">
-                        <div class="stat-card">
-                            <div class="stat-value">1000+</div>
-                            <div class="stat-label">Students Trained</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">4.9</div>
-                            <div class="stat-label">Avg Rating</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">85%</div>
-                            <div class="stat-label">Placement Rate</div>
-                        </div>
-                    </div>
-                    
-                    <p>Rajesh is a seasoned Java developer with extensive experience in building enterprise-grade applications. He has worked with major tech companies before transitioning to full-time training.</p>
-                    
-                    <h3 style="margin-top: 30px;">Key Skills</h3>
-                    <div class="skills-container">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Java & Spring Boot</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Microservices Architecture</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>System Design</span>
-                                <span>88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Cloud Technologies</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="margin-top: 30px;">Professional Experience</h3>
-                    <ul style="margin-top: 15px; padding-left: 20px;">
-                        <li>Senior Developer at TechSolutions Inc. (2015-2020)</li>
-                        <li>Lead Java Trainer at CodeMasters (2012-2015)</li>
-                        <li>Software Engineer at GlobalSoft (2008-2012)</li>
-                    </ul>
-                    
-                    <h3 style="margin-top: 30px;">Education</h3>
-                    <p>M.Tech in Computer Science, IIT Delhi</p>
-                    
-                    <button class="btn" style="margin-top: 30px;">View Course Portfolio</button>
-                </div>
-            </div>
+    <!-- Trainer Modals (Dynamic) -->
+    <div id="trainerModal" class="modal">
+        <div class="modal-content" id="trainerModalContent"></div>
+    </div>
+    <div id="addTrainerModal" class="modal">
+        <div class="modal-content" style="max-width: 420px; margin: 0 auto; padding: 32px 24px;">
+            <span class="close-modal" onclick="closeAddTrainerModal()">&times;</span>
+            <h2 style="margin-bottom: 18px; color: #1a237e;">Add New Trainer</h2>
+            <form id="addTrainerForm" autocomplete="off">
+                <input type="text" id="trainerName" placeholder="Name" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="text" id="trainerSpecialty" placeholder="Specialty" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="text" id="trainerQualification" placeholder="Qualification" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="text" id="trainerExperience" placeholder="Experience (e.g. 8+ Years)" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="number" id="trainerTrainings" placeholder="No. of Trainings" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="text" id="trainerInstitutions" placeholder="Top Institutions (comma separated)" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="number" id="trainerAvgRating" placeholder="Average Rating" step="0.1" min="0" max="5" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="number" id="trainerStudents" placeholder="No. of Students Trained" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="number" id="trainerPlacementRate" placeholder="Placement Rate (%)" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <textarea id="trainerAbout" placeholder="About Trainer" required style="width:100%;margin-bottom:12px;padding:10px;"></textarea>
+                <input type="url" id="trainerPhoto" placeholder="Photo URL (circle image)" required style="width:100%;margin-bottom:12px;padding:10px;">
+                <input type="text" id="trainerGallery" placeholder="Gallery Image URLs (comma separated)" style="width:100%;margin-bottom:12px;padding:10px;">
+                <button type="submit" class="btn" style="width:100%;margin-top:8px;">Add Trainer</button>
+            </form>
         </div>
     </div>
-    
-    <!-- Modal 2 -->
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="trainer-profile">
-                <div class="profile-image" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
-                <div class="profile-details">
-                    <div class="profile-header">
-                        <h2>Priya Sharma</h2>
-                        <p class="trainer-specialty" style="display: inline-block; margin-top: 0;">AI/ML Specialist</p>
-                        <p>Data Science Lead | 8+ years experience</p>
-                    </div>
-                    
-                    <div class="profile-stats">
-                        <div class="stat-card">
-                            <div class="stat-value">750+</div>
-                            <div class="stat-label">Students Trained</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">4.8</div>
-                            <div class="stat-label">Avg Rating</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">82%</div>
-                            <div class="stat-label">Placement Rate</div>
-                        </div>
-                    </div>
-                    
-                    <p>Priya is a machine learning expert with extensive experience in implementing AI solutions for Fortune 500 companies. She specializes in making complex concepts accessible to students.</p>
-                    
-                    <h3 style="margin-top: 30px;">Key Skills</h3>
-                    <div class="skills-container">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Machine Learning</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Deep Learning</span>
-                                <span>92%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 92%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Python for Data Science</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Natural Language Processing</span>
-                                <span>88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="margin-top: 30px;">Professional Experience</h3>
-                    <ul style="margin-top: 15px; padding-left: 20px;">
-                        <li>Data Scientist at AI Innovations (2017-2021)</li>
-                        <li>ML Engineer at DataWise (2014-2017)</li>
-                        <li>Research Assistant at Tech University (2012-2014)</li>
-                    </ul>
-                    
-                    <h3 style="margin-top: 30px;">Education</h3>
-                    <p>PhD in Artificial Intelligence, Stanford University</p>
-                    
-                    <button class="btn" style="margin-top: 30px;">View Course Portfolio</button>
-                </div>
-            </div>
+    <div id="removeTrainerModal" class="modal">
+        <div class="modal-content" style="max-width: 420px; margin: 0 auto; padding: 32px 24px;">
+            <span class="close-modal" onclick="closeRemoveTrainerModal()">&times;</span>
+            <h2 style="margin-bottom: 18px; color: #e040fb;">Remove Trainer</h2>
+            <form id="removeTrainerForm" autocomplete="off">
+                <select id="removeTrainerSelect" style="width:100%;margin-bottom:18px;padding:10px;"></select>
+                <button type="submit" class="btn" style="width:100%;background:#e040fb;">Remove</button>
+            </form>
         </div>
     </div>
-    
-    <!-- Add similar modals for other trainers (modal3 to modal6) -->
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <h3>Skillzen Institute Pvt Ltd</h3>
-                <p>Your Pathway to Placement Excellence</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-                <p>Contact: info@skillzen.com | +91-XXXXXX5678</p>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Skillzen Institute. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
+    // Trainer Data Array
+    const trainers = [
+        {
+            id: '1',
+            name: 'Rajesh Kumar',
+            photo: 'https://randomuser.me/api/portraits/men/32.jpg',
+            specialty: 'Java Expert',
+            qualification: 'M.Tech in Computer Science, IIT Delhi',
+            experience: '10+ Years',
+            trainings: 120,
+            institutions: ['IIT Delhi', 'Anna University', 'SRM University', 'VIT', 'Tech Mahindra Academy'],
+            avgRating: 4.9,
+            students: 1000,
+            placementRate: 85,
+            about: 'Rajesh is a seasoned Java developer with extensive experience in building enterprise-grade applications. He has worked with major tech companies before transitioning to full-time training.',
+            gallery: [
+                'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=facearea&w=200&q=80',
+                'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=facearea&w=200&q=80',
+                'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=facearea&w=200&q=80',
+                'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=facearea&w=200&q=80'
+            ]
+        },
+        {
+            id: '2',
+            name: 'Priya Sharma',
+            photo: 'https://randomuser.me/api/portraits/women/44.jpg',
+            specialty: 'AI/ML Specialist',
+            qualification: 'PhD in Artificial Intelligence, Stanford University',
+            experience: '8+ Years',
+            trainings: 90,
+            institutions: ['Stanford', 'IIT Madras', 'BITS Pilani', 'Infosys Academy'],
+            avgRating: 4.8,
+            students: 750,
+            placementRate: 82,
+            about: 'Priya is a machine learning expert with extensive experience in implementing AI solutions for Fortune 500 companies. She specializes in making complex concepts accessible to students.',
+            gallery: [
+                'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=facearea&w=200&q=80',
+                'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=facearea&w=200&q=80'
+            ]
+        }
+        // Add more trainers as needed
+    ];
+
+    // Load trainers from localStorage if available
+    function loadTrainers() {
+        const saved = localStorage.getItem('skillzen_trainers');
+        if (saved) {
+            try {
+                const arr = JSON.parse(saved);
+                if (Array.isArray(arr) && arr.length) {
+                    trainers.length = 0;
+                    arr.forEach(t => trainers.push(t));
+                }
+            } catch(e) {}
+        }
+    }
+    // Save trainers to localStorage
+    function saveTrainers() {
+        localStorage.setItem('skillzen_trainers', JSON.stringify(trainers));
+    }
+    // Patch: Always convert Google Drive links for all trainer images in grid and modal
+    function toDirectDriveLink(url) {
+        if (!url) return '';
+        // Accept links with or without trailing slash or /view or nothing after ID
+        let match = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+        if (match) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+        match = url.match(/drive\.google\.com\/open\?id=([\w-]+)/);
+        if (match) return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+        return url;
+    }
+    // Render Trainers Grid
+    function renderTrainers() {
+        const grid = document.querySelector('.trainers-grid');
+        grid.innerHTML = trainers.map((t, idx) => `
+            <div class="trainer-card" onclick="openTrainerModal('${t.id}')">
+                <div class="trainer-image" style="display: flex; align-items: center; justify-content: center; position: relative; background: #fff;">
+                    <img src="${toDirectDriveLink(t.photo)}" alt="${t.name}" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #e0c3fc; box-shadow: 0 2px 8px #7b1fa233; background: #fff;" onerror="this.onerror=null;this.src='https://via.placeholder.com/90?text=No+Image';">
+                    <div class="trainer-overlay" style="position: absolute; left: 0; right: 0; bottom: 0;">
+                        <h3>${t.name}</h3>
+                        <p>${t.specialty}</p>
+                    </div>
+                </div>
+                <div class="trainer-info">
+                    <p>${t.experience} experience</p>
+                    <span class="trainer-specialty">${t.specialty}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+    // Always convert Google Drive links on display (for photo and gallery)
+    function openTrainerModal(id) {
+        const t = trainers.find(tr => tr.id === id);
+        if (!t) return;
+        const modal = document.getElementById('trainerModal');
+        const content = document.getElementById('trainerModalContent');
+        content.innerHTML = `
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div style="display: flex; flex-direction: column; align-items: center; padding: 32px 18px;">
+                <img src="${toDirectDriveLink(t.photo)}" alt="${t.name}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 6px solid #e0c3fc; box-shadow: 0 4px 18px #7b1fa255; margin-bottom: 18px;">
+                <h2 style="margin-bottom: 6px; color: #1a237e;">${t.name}</h2>
+                <div class="trainer-specialty" style="margin-bottom: 10px;">${t.specialty}</div>
+                <div style="margin-bottom: 18px; text-align: center;">
+                    <div style="font-size: 1.08rem; color: #333; margin-bottom: 4px;">${t.qualification}</div>
+                    <div style="font-size: 1.05rem; color: #7b1fa2;">${t.experience} | ${t.trainings}+ Trainings</div>
+                </div>
+                <div style="margin-bottom: 18px; text-align: center;">
+                    <strong style="color:#3a237a;">Top Institutions Trained:</strong>
+                    <div style="margin-top: 6px; color: #222; font-size: 1rem;">${t.institutions.join(', ')}</div>
+                </div>
+                <div style="display: flex; gap: 32px; justify-content: center; margin-bottom: 18px;">
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:700;color:#1a237e;">${t.avgRating}</div>
+                        <div style="font-size:0.95rem;color:#666;">Avg Rating</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:700;color:#1a237e;">${t.students}+</div>
+                        <div style="font-size:0.95rem;color:#666;">Students Trained</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:700;color:#1a237e;">${t.placementRate}%</div>
+                        <div style="font-size:0.95rem;color:#666;">Placement Rate</div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 18px; text-align: center; max-width: 600px; color: #444;">${t.about}</div>
+                <div style="margin-bottom: 18px; width: 100%;">
+                    <h3 style="color:#7b1fa2; margin-bottom: 10px;">Session Gallery</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                        ${t.gallery.map(img => `<img src="${toDirectDriveLink(img)}" style="width: 90px; height: 90px; border-radius: 16px; object-fit: cover; box-shadow: 0 2px 8px #7b1fa233;">`).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        document.getElementById('trainerModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    window.onclick = function(event) {
+        if (event.target.classList && event.target.classList.contains('modal')) {
+            closeModal();
+        }
+    }
+    // Add Trainer Modal Logic
+    const addTrainerBtn = document.getElementById('addTrainerBtn');
+    const addTrainerModal = document.getElementById('addTrainerModal');
+    const addTrainerForm = document.getElementById('addTrainerForm');
+    addTrainerBtn.onclick = () => { addTrainerModal.style.display = 'block'; document.body.style.overflow = 'hidden'; };
+    function closeAddTrainerModal() { addTrainerModal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+    // Helper: Convert Google Drive link to direct link
+    // Patch addTrainerForm to auto-convert photo and gallery links
+    addTrainerForm.onsubmit = function(e) {
+        e.preventDefault();
+        const rawPhoto = document.getElementById('trainerPhoto').value;
+        // Collect all gallery inputs (main and added)
+        const galleryInputs = [document.getElementById('trainerGallery'), ...Array.from(addTrainerForm.querySelectorAll('input[data-gallery="true"]'))];
+        const galleryLinks = galleryInputs.map(inp => toDirectDriveLink(inp.value)).filter(Boolean);
+        const t = {
+            id: Date.now().toString(),
+            name: document.getElementById('trainerName').value,
+            specialty: document.getElementById('trainerSpecialty').value,
+            qualification: document.getElementById('trainerQualification').value,
+            experience: document.getElementById('trainerExperience').value,
+            trainings: parseInt(document.getElementById('trainerTrainings').value),
+            institutions: document.getElementById('trainerInstitutions').value.split(',').map(s=>s.trim()),
+            avgRating: parseFloat(document.getElementById('trainerAvgRating').value),
+            students: parseInt(document.getElementById('trainerStudents').value),
+            placementRate: parseInt(document.getElementById('trainerPlacementRate').value),
+            about: document.getElementById('trainerAbout').value,
+            photo: toDirectDriveLink(rawPhoto),
+            gallery: galleryLinks
+        };
+        trainers.push(t);
+        saveTrainers();
+        renderTrainers();
+        closeAddTrainerModal();
+    };
+    // Gallery add more button
+    const galleryInput = document.getElementById('trainerGallery');
+    const galleryAddBtn = document.createElement('button');
+    galleryAddBtn.type = 'button';
+    galleryAddBtn.textContent = 'Add More';
+    galleryAddBtn.className = 'btn';
+    galleryAddBtn.style = 'margin-bottom:12px; margin-left:8px; padding:8px 18px; font-size:0.95rem;';
+    galleryInput.parentNode.insertBefore(galleryAddBtn, galleryInput.nextSibling);
+    galleryAddBtn.onclick = function() {
+        const newInput = document.createElement('input');
+        newInput.type = 'url';
+        newInput.placeholder = 'Gallery Image URL';
+        newInput.setAttribute('data-gallery', 'true');
+        newInput.style = 'width:100%;margin-bottom:12px;padding:10px;';
+        galleryInput.parentNode.insertBefore(newInput, galleryAddBtn);
+        newInput.focus();
+    };
+
+    // Remove Trainer Modal Logic
+    const removeTrainerBtn = document.getElementById('removeTrainerBtn');
+    const removeTrainerModal = document.getElementById('removeTrainerModal');
+    const removeTrainerForm = document.getElementById('removeTrainerForm');
+    const removeTrainerSelect = document.getElementById('removeTrainerSelect');
+    removeTrainerBtn.onclick = () => {
+        removeTrainerSelect.innerHTML = trainers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+        removeTrainerModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    };
+    function closeRemoveTrainerModal() { removeTrainerModal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+    removeTrainerForm.onsubmit = function(e) {
+        e.preventDefault();
+        const id = removeTrainerSelect.value;
+        const idx = trainers.findIndex(t => t.id === id);
+        if(idx !== -1) trainers.splice(idx, 1);
+        saveTrainers();
+        renderTrainers();
+        closeRemoveTrainerModal();
+    };
+
         // Initialize Chart
         const ctx = document.getElementById('trainerChart').getContext('2d');
         const trainerChart = new Chart(ctx, {
@@ -713,6 +695,30 @@
                 closeModal();
             }
         }
+
+    // On page load
+    loadTrainers();
+    renderTrainers();
     </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Skillzen Institute Pvt Ltd</h3>
+                <p>Your Pathway to Placement Excellence</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p>Contact: info@skillzen.com | +91-XXXXXX5678</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Skillzen Institute. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
