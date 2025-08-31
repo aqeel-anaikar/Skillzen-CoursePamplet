@@ -526,8 +526,14 @@
     }
     // Always convert Google Drive links on display (for photo and gallery)
     function openTrainerModal(id) {
-        const t = trainers.find(tr => tr.id === id);
-        if (!t) return;
+        console.log('[openTrainerModal] called with id:', id);
+        console.log('[openTrainerModal] trainers:', trainers);
+        const t = trainers.find(tr => String(tr.id) === String(id));
+        if (!t) {
+            console.error('[openTrainerModal] Trainer not found for id:', id);
+            return;
+        }
+        console.log('[openTrainerModal] Found trainer:', t);
         const modal = document.getElementById('trainerModal');
         const content = document.getElementById('trainerModalContent');
         content.innerHTML = `
