@@ -445,22 +445,55 @@
         // Add more trainers as needed
     ];
 
-    // Load trainers from localStorage if available
+    // --- Google Sheets CSV Integration ---
+    // Your published CSV URL
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSa8mBpyOqY4exoTuL_YLbMxGE_62VL08bwXOkD93ILgw-k4t6Thwmqk_FebM7I3cZhMjqbefwm88gR/pub?output=csv';
+    // Parse CSV to array of objects
+    function parseCSV(csv) {
+        const lines = csv.split('\n').filter(Boolean);
+        const headers = lines[0].split(',').map(h => h.trim());
+        return lines.slice(1).map(line => {
+            const values = line.split(',');
+            const obj = {};
+            headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : '');
+            // Parse gallery as array if present
+            if(obj.gallery) obj.gallery = obj.gallery.split(';').map(s=>s.trim()).filter(Boolean);
+            else obj.gallery = [];
+            // Parse institutions as array
+            if(obj.institutions) obj.institutions = obj.institutions.split(';').map(s=>s.trim()).filter(Boolean);
+            else obj.institutions = [];
+            return obj;
+        });
+    }
+    // Fetch trainers from Google Sheets CSV
+    async function fetchTrainersFromSheet() {
+        try {
+            const res = await fetch(SHEET_CSV_URL);
+            const csv = await res.text();
+            const sheetTrainers = parseCSV(csv);
+            trainers.length = 0;
+            sheetTrainers.forEach(t => trainers.push(t));
+            renderTrainers();
+        } catch (e) {
+            console.error('Failed to fetch trainers from Google Sheets:', e);
+        }
+    }
+    // Save trainers to localStorage after every add/remove
+    function saveTrainers() {
+        localStorage.setItem('skillzen_trainers', JSON.stringify(trainers));
+    }
+    // Load trainers from localStorage on page load
     function loadTrainers() {
         const saved = localStorage.getItem('skillzen_trainers');
         if (saved) {
             try {
                 const arr = JSON.parse(saved);
-                if (Array.isArray(arr) && arr.length) {
+                if (Array.isArray(arr)) {
                     trainers.length = 0;
                     arr.forEach(t => trainers.push(t));
                 }
             } catch(e) {}
         }
-    }
-    // Save trainers to localStorage
-    function saveTrainers() {
-        localStorage.setItem('skillzen_trainers', JSON.stringify(trainers));
     }
     // Patch: Always convert Google Drive links for all trainer images in grid and modal
     function toDirectDriveLink(url) {
@@ -554,31 +587,44 @@
     function closeAddTrainerModal() { addTrainerModal.style.display = 'none'; document.body.style.overflow = 'auto'; }
     // Helper: Convert Google Drive link to direct link
     // Patch addTrainerForm to auto-convert photo and gallery links
-    addTrainerForm.onsubmit = function(e) {
+    // --- Add Trainer: POST to Google Apps Script Web App ---
+    const SHEET_POST_URL = 'https://script.google.com/macros/s/AKfycbyln9CCZIZ4nLU-r80_lgBD1XPzjSGsQiiF3CyJWyqZo1tzSfNiF_IiHA-I4flvdQ6H/exec';
+    addTrainerForm.onsubmit = async function(e) {
         e.preventDefault();
         const rawPhoto = document.getElementById('trainerPhoto').value;
-        // Collect all gallery inputs (main and added)
         const galleryInputs = [document.getElementById('trainerGallery'), ...Array.from(addTrainerForm.querySelectorAll('input[data-gallery="true"]'))];
         const galleryLinks = galleryInputs.map(inp => toDirectDriveLink(inp.value)).filter(Boolean);
         const t = {
-            id: Date.now().toString(),
             name: document.getElementById('trainerName').value,
+            photo: toDirectDriveLink(rawPhoto),
             specialty: document.getElementById('trainerSpecialty').value,
             qualification: document.getElementById('trainerQualification').value,
             experience: document.getElementById('trainerExperience').value,
-            trainings: parseInt(document.getElementById('trainerTrainings').value),
-            institutions: document.getElementById('trainerInstitutions').value.split(',').map(s=>s.trim()),
-            avgRating: parseFloat(document.getElementById('trainerAvgRating').value),
-            students: parseInt(document.getElementById('trainerStudents').value),
-            placementRate: parseInt(document.getElementById('trainerPlacementRate').value),
+            trainings: document.getElementById('trainerTrainings').value,
+            institutions: document.getElementById('trainerInstitutions').value,
+            avgRating: document.getElementById('trainerAvgRating').value,
+            students: document.getElementById('trainerStudents').value,
+            placementRate: document.getElementById('trainerPlacementRate').value,
             about: document.getElementById('trainerAbout').value,
-            photo: toDirectDriveLink(rawPhoto),
-            gallery: galleryLinks
+            gallery: galleryLinks.join(';')
         };
-        trainers.push(t);
-        saveTrainers();
-        renderTrainers();
-        closeAddTrainerModal();
+        try {
+            const res = await fetch(SHEET_POST_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(t)
+            });
+            const result = await res.json();
+            if(result.result === 'success') {
+                alert('Trainer added!');
+                fetchTrainersFromSheet(); // Refresh from sheet
+                closeAddTrainerModal();
+            } else {
+                alert('Failed to add trainer.');
+            }
+        } catch (err) {
+            alert('Error adding trainer: ' + err);
+        }
     };
     // Gallery add more button
     const galleryInput = document.getElementById('trainerGallery');
@@ -699,6 +745,7 @@
     // On page load
     loadTrainers();
     renderTrainers();
+    fetchTrainersFromSheet();
     </script>
 
     <!-- Footer -->
