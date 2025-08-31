@@ -449,11 +449,31 @@
     // Your published CSV URL
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSa8mBpyOqY4exoTuL_YLbMxGE_62VL08bwXOkD93ILgw-k4t6Thwmqk_FebM7I3cZhMjqbefwm88gR/pub?output=csv';
     // Parse CSV to array of objects
+    // Robust CSV parser for quoted fields
     function parseCSV(csv) {
-        const lines = csv.split('\n').filter(Boolean);
+        const lines = csv.split(/\r?\n/).filter(Boolean);
         const headers = lines[0].split(',').map(h => h.trim());
         return lines.slice(1).map(line => {
-            const values = line.split(',');
+            const values = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    if (inQuotes && line[i+1] === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    values.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            values.push(current);
             const obj = {};
             headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : '');
             // Parse gallery as array if present
@@ -472,7 +492,18 @@
             const csv = await res.text();
             const sheetTrainers = parseCSV(csv);
             trainers.length = 0;
-            sheetTrainers.forEach(t => trainers.push(t));
+            // Ensure each trainer has a unique id (use existing or generate from name+index)
+            sheetTrainers.forEach((t, idx) => {
+                if (!t.id || t.id === '') {
+                    t.id = (t.name ? t.name.replace(/\s+/g, '_').toLowerCase() : 'trainer') + '_' + idx;
+                }
+                // Debug: log raw and parsed gallery for each trainer
+                console.log('[fetchTrainersFromSheet] Trainer:', t.name, 'Raw gallery:', t.gallery);
+                if (Array.isArray(t.gallery)) {
+                    console.log('[fetchTrainersFromSheet] Trainer:', t.name, 'Parsed gallery array:', t.gallery);
+                }
+                trainers.push(t);
+            });
             renderTrainers();
         } catch (e) {
             console.error('Failed to fetch trainers from Google Sheets:', e);
@@ -508,8 +539,8 @@
     // Render Trainers Grid
     function renderTrainers() {
         const grid = document.querySelector('.trainers-grid');
-        grid.innerHTML = trainers.map((t, idx) => `
-            <div class="trainer-card" onclick="openTrainerModal('${t.id}')">
+        grid.innerHTML = trainers.map((t) => `
+            <div class="trainer-card" onclick="openTrainerModal('${String(t.id)}')">
                 <div class="trainer-image" style="display: flex; align-items: center; justify-content: center; position: relative; background: #fff;">
                     <img src="${toDirectDriveLink(t.photo)}" alt="${t.name}" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #e0c3fc; box-shadow: 0 2px 8px #7b1fa233; background: #fff;" onerror="this.onerror=null;this.src='https://via.placeholder.com/90?text=No+Image';">
                     <div class="trainer-overlay" style="position: absolute; left: 0; right: 0; bottom: 0;">
@@ -518,7 +549,7 @@
                     </div>
                 </div>
                 <div class="trainer-info">
-                    <p>${t.experience} experience</p>
+                    <p>${t.experience} Years experience</p>
                     <span class="trainer-specialty">${t.specialty}</span>
                 </div>
             </div>
@@ -526,14 +557,15 @@
     }
     // Always convert Google Drive links on display (for photo and gallery)
     function openTrainerModal(id) {
-        console.log('[openTrainerModal] called with id:', id);
-        console.log('[openTrainerModal] trainers:', trainers);
+    console.log('[openTrainerModal] called with id:', id);
+    console.log('[openTrainerModal] trainers:', trainers);
         const t = trainers.find(tr => String(tr.id) === String(id));
         if (!t) {
             console.error('[openTrainerModal] Trainer not found for id:', id);
             return;
         }
         console.log('[openTrainerModal] Found trainer:', t);
+    console.log('[openTrainerModal] Gallery to render:', t.gallery);
         const modal = document.getElementById('trainerModal');
         const content = document.getElementById('trainerModalContent');
         content.innerHTML = `
@@ -544,7 +576,7 @@
                 <div class="trainer-specialty" style="margin-bottom: 10px;">${t.specialty}</div>
                 <div style="margin-bottom: 18px; text-align: center;">
                     <div style="font-size: 1.08rem; color: #333; margin-bottom: 4px;">${t.qualification}</div>
-                    <div style="font-size: 1.05rem; color: #7b1fa2;">${t.experience} | ${t.trainings}+ Trainings</div>
+                    <div style="font-size: 1.05rem; color: #7b1fa2;">${t.experience} Years | ${t.trainings}+ Trainings</div>
                 </div>
                 <div style="margin-bottom: 18px; text-align: center;">
                     <strong style="color:#3a237a;">Top Institutions Trained:</strong>
@@ -567,12 +599,39 @@
                 <div style="margin-bottom: 18px; text-align: center; max-width: 600px; color: #444;">${t.about}</div>
                 <div style="margin-bottom: 18px; width: 100%;">
                     <h3 style="color:#7b1fa2; margin-bottom: 10px;">Session Gallery</h3>
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-                        ${t.gallery.map(img => `<img src="${toDirectDriveLink(img)}" style="width: 90px; height: 90px; border-radius: 16px; object-fit: cover; box-shadow: 0 2px 8px #7b1fa233;">`).join('')}
+                    <div style="display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;">
+                        ${Array.isArray(t.gallery) ? t.gallery.map((img, i) => `<img src="${toDirectDriveLink(img)}" style="width: 160px; height: 160px; border-radius: 18px; object-fit: cover; box-shadow: 0 2px 12px #7b1fa233; cursor: pointer;" onclick="openGalleryLightbox('${toDirectDriveLink(img)}')" alt="Session Image ${i+1}">`).join('') : ''}
                     </div>
                 </div>
             </div>
         `;
+        // Lightbox modal logic (create if not exists)
+        if (!document.getElementById('galleryLightbox')) {
+            const lightbox = document.createElement('div');
+            lightbox.id = 'galleryLightbox';
+            lightbox.style.display = 'none';
+            lightbox.style.position = 'fixed';
+            lightbox.style.top = '0';
+            lightbox.style.left = '0';
+            lightbox.style.width = '100vw';
+            lightbox.style.height = '100vh';
+            lightbox.style.background = 'rgba(0,0,0,0.92)';
+            lightbox.style.zIndex = '2000';
+            lightbox.style.justifyContent = 'center';
+            lightbox.style.alignItems = 'center';
+            lightbox.style.display = 'flex';
+            lightbox.innerHTML = `<img id="galleryLightboxImg" src="" style="max-width:90vw; max-height:90vh; border-radius: 18px; box-shadow: 0 4px 32px #000a;">`;
+            lightbox.onclick = function(e) {
+                if (e.target === lightbox) lightbox.style.display = 'none';
+            };
+            document.body.appendChild(lightbox);
+        }
+        window.openGalleryLightbox = function(imgUrl) {
+            const lightbox = document.getElementById('galleryLightbox');
+            const img = document.getElementById('galleryLightboxImg');
+            img.src = imgUrl;
+            lightbox.style.display = 'flex';
+        };
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
