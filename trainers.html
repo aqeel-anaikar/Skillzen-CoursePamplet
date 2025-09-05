@@ -328,14 +328,17 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <h1>Our Expert Trainers</h1>
+       <!-- Header -->
+        <header style="background: linear-gradient(120deg, #7b1fa2 0%, #3a237a 30%, #cc99ff 70%, #ffcccc 100%); color: white; text-align: center; padding: 90px 20px 60px 20px; position: relative; overflow: hidden; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px; box-shadow: 0 8px 32px rgba(123,31,162,0.12);">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 10px;">
+                <h1>Our Expert Trainers</h1>
+            </div>            
             <p>Meet Skillzen's industry-leading trainers who bring real-world experience and cutting-edge knowledge to your learning journey</p>
+            <a href="index.html" class="btn" style="margin-top:18px;">&larr; Back to Home</a>
         </div>
     </header>
-
+    
     <!-- Main Content -->
     <main class="container">
         <!-- Trainer Distribution Chart -->
@@ -359,10 +362,7 @@
         </section>
 
         <section style="margin-bottom: 32px;">
-            <div class="container" style="display: flex; justify-content: flex-end; gap: 18px; align-items: center;">
-                <button id="addTrainerBtn" title="Add Trainer" style="background: #4caf50; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px #4caf5040;">+</button>
-                <button id="removeTrainerBtn" title="Remove Trainer" style="background: #e040fb; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px #e040fb40;">&minus;</button>
-            </div>
+            <!-- Add/Remove Trainer buttons removed -->
         </section>
     </main>
 
@@ -370,37 +370,7 @@
     <div id="trainerModal" class="modal">
         <div class="modal-content" id="trainerModalContent"></div>
     </div>
-    <div id="addTrainerModal" class="modal">
-        <div class="modal-content" style="max-width: 420px; margin: 0 auto; padding: 32px 24px;">
-            <span class="close-modal" onclick="closeAddTrainerModal()">&times;</span>
-            <h2 style="margin-bottom: 18px; color: #1a237e;">Add New Trainer</h2>
-            <form id="addTrainerForm" autocomplete="off">
-                <input type="text" id="trainerName" placeholder="Name" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="text" id="trainerSpecialty" placeholder="Specialty" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="text" id="trainerQualification" placeholder="Qualification" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="text" id="trainerExperience" placeholder="Experience (e.g. 8+ Years)" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="number" id="trainerTrainings" placeholder="No. of Trainings" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="text" id="trainerInstitutions" placeholder="Top Institutions (comma separated)" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="number" id="trainerAvgRating" placeholder="Average Rating" step="0.1" min="0" max="5" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="number" id="trainerStudents" placeholder="No. of Students Trained" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="number" id="trainerPlacementRate" placeholder="Placement Rate (%)" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <textarea id="trainerAbout" placeholder="About Trainer" required style="width:100%;margin-bottom:12px;padding:10px;"></textarea>
-                <input type="url" id="trainerPhoto" placeholder="Photo URL (circle image)" required style="width:100%;margin-bottom:12px;padding:10px;">
-                <input type="text" id="trainerGallery" placeholder="Gallery Image URLs (comma separated)" style="width:100%;margin-bottom:12px;padding:10px;">
-                <button type="submit" class="btn" style="width:100%;margin-top:8px;">Add Trainer</button>
-            </form>
-        </div>
-    </div>
-    <div id="removeTrainerModal" class="modal">
-        <div class="modal-content" style="max-width: 420px; margin: 0 auto; padding: 32px 24px;">
-            <span class="close-modal" onclick="closeRemoveTrainerModal()">&times;</span>
-            <h2 style="margin-bottom: 18px; color: #e040fb;">Remove Trainer</h2>
-            <form id="removeTrainerForm" autocomplete="off">
-                <select id="removeTrainerSelect" style="width:100%;margin-bottom:18px;padding:10px;"></select>
-                <button type="submit" class="btn" style="width:100%;background:#e040fb;">Remove</button>
-            </form>
-        </div>
-    </div>
+    <!-- Add/Remove Trainer modals removed -->
     <script>
     // Trainer Data Array
     const trainers = [
@@ -645,90 +615,7 @@
         }
     }
     // Add Trainer Modal Logic
-    const addTrainerBtn = document.getElementById('addTrainerBtn');
-    const addTrainerModal = document.getElementById('addTrainerModal');
-    const addTrainerForm = document.getElementById('addTrainerForm');
-    addTrainerBtn.onclick = () => { addTrainerModal.style.display = 'block'; document.body.style.overflow = 'hidden'; };
-    function closeAddTrainerModal() { addTrainerModal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-    // Helper: Convert Google Drive link to direct link
-    // Patch addTrainerForm to auto-convert photo and gallery links
-    // --- Add Trainer: POST to Google Apps Script Web App ---
-    const SHEET_POST_URL = 'https://script.google.com/macros/s/AKfycbyln9CCZIZ4nLU-r80_lgBD1XPzjSGsQiiF3CyJWyqZo1tzSfNiF_IiHA-I4flvdQ6H/exec';
-    addTrainerForm.onsubmit = async function(e) {
-        e.preventDefault();
-        const rawPhoto = document.getElementById('trainerPhoto').value;
-        const galleryInputs = [document.getElementById('trainerGallery'), ...Array.from(addTrainerForm.querySelectorAll('input[data-gallery="true"]'))];
-        const galleryLinks = galleryInputs.map(inp => toDirectDriveLink(inp.value)).filter(Boolean);
-        const t = {
-            name: document.getElementById('trainerName').value,
-            photo: toDirectDriveLink(rawPhoto),
-            specialty: document.getElementById('trainerSpecialty').value,
-            qualification: document.getElementById('trainerQualification').value,
-            experience: document.getElementById('trainerExperience').value,
-            trainings: document.getElementById('trainerTrainings').value,
-            institutions: document.getElementById('trainerInstitutions').value,
-            avgRating: document.getElementById('trainerAvgRating').value,
-            students: document.getElementById('trainerStudents').value,
-            placementRate: document.getElementById('trainerPlacementRate').value,
-            about: document.getElementById('trainerAbout').value,
-            gallery: galleryLinks.join(';')
-        };
-        try {
-            const res = await fetch(SHEET_POST_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(t)
-            });
-            const result = await res.json();
-            if(result.result === 'success') {
-                alert('Trainer added!');
-                fetchTrainersFromSheet(); // Refresh from sheet
-                closeAddTrainerModal();
-            } else {
-                alert('Failed to add trainer.');
-            }
-        } catch (err) {
-            alert('Error adding trainer: ' + err);
-        }
-    };
-    // Gallery add more button
-    const galleryInput = document.getElementById('trainerGallery');
-    const galleryAddBtn = document.createElement('button');
-    galleryAddBtn.type = 'button';
-    galleryAddBtn.textContent = 'Add More';
-    galleryAddBtn.className = 'btn';
-    galleryAddBtn.style = 'margin-bottom:12px; margin-left:8px; padding:8px 18px; font-size:0.95rem;';
-    galleryInput.parentNode.insertBefore(galleryAddBtn, galleryInput.nextSibling);
-    galleryAddBtn.onclick = function() {
-        const newInput = document.createElement('input');
-        newInput.type = 'url';
-        newInput.placeholder = 'Gallery Image URL';
-        newInput.setAttribute('data-gallery', 'true');
-        newInput.style = 'width:100%;margin-bottom:12px;padding:10px;';
-        galleryInput.parentNode.insertBefore(newInput, galleryAddBtn);
-        newInput.focus();
-    };
-
-    // Remove Trainer Modal Logic
-    const removeTrainerBtn = document.getElementById('removeTrainerBtn');
-    const removeTrainerModal = document.getElementById('removeTrainerModal');
-    const removeTrainerForm = document.getElementById('removeTrainerForm');
-    const removeTrainerSelect = document.getElementById('removeTrainerSelect');
-    removeTrainerBtn.onclick = () => {
-        removeTrainerSelect.innerHTML = trainers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-        removeTrainerModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    };
-    function closeRemoveTrainerModal() { removeTrainerModal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-    removeTrainerForm.onsubmit = function(e) {
-        e.preventDefault();
-        const id = removeTrainerSelect.value;
-        const idx = trainers.findIndex(t => t.id === id);
-        if(idx !== -1) trainers.splice(idx, 1);
-        saveTrainers();
-        renderTrainers();
-        closeRemoveTrainerModal();
-    };
+    // Add/Remove Trainer logic removed
 
         // Initialize Chart
         const ctx = document.getElementById('trainerChart').getContext('2d');
@@ -813,22 +700,33 @@
     fetchTrainersFromSheet();
     </script>
 
-    <!-- Footer -->
-    <footer>
+        <!-- Footer -->
+        <!-- Footer -->
+    <footer style="background: linear-gradient(120deg, #3a237a 0%, #7b1fa2 30%, #cc99ff 70%, #ffcccc 100%); color: white; padding: 60px 0 20px; border-top-left-radius: 40px; border-top-right-radius: 40px; box-shadow: 0 -4px 32px rgba(44,19,59,0.10); margin-top: 60px;">
         <div class="container">
-            <div class="footer-content">
-                <h3>Skillzen Institute Pvt Ltd</h3>
-                <p>Your Pathway to Placement Excellence</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+            <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 32px;">
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px;">
+                    <h3 style="background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 20px; font-size: 1.3rem;">Skillzen Institute</h3>
+                    <p style="color:#e0e0e0;">Your Pathway to Placement Excellence</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
-                <p>Contact: info@skillzen.com | +91-XXXXXX5678</p>
+                <div class="footer-column" style="flex: 1 1 260px; min-width: 220px; text-align: right;">
+                    <h3 style="background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; margin-bottom: 20px; font-size: 1.3rem;">Contact Us</h3>
+                    <ul style="list-style: none; padding-left: 0; color:#e0e0e0;">
+                        <li><i class="fas fa-phone"></i> +91 90033 59799</li>
+                        <li><i class="fas fa-envelope"></i> training@skillzeninstitute.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Chennai</li>
+                    </ul>
+                </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2023 Skillzen Institute. All rights reserved.</p>
+            <div class="copyright" style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(44,19,59,0.15); background: linear-gradient(90deg, #fff 10%, #cc99ff 40%, #9999ff 70%, #2d133b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; font-size: 0.9rem;">
+                <p>&copy; 2023 Skillzen Institute Pvt Ltd. All rights reserved.</p>
             </div>
         </div>
     </footer>
